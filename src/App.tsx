@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useMemo } from "react";
+import { ThemeProvider } from "styled-components";
+import useLocalStorage from "./hooks/useLocalStorage";
+import { GlobalStyle } from "./styles/global";
+import themes from "./styles/themes";
+
+type Theme = "dark" | "light";
+
+function AppWithTheme() {
+  const [theme, setTheme] = useLocalStorage<Theme>("theme", "dark");
+
+  const currentTheme = useMemo(() => {
+    return themes[theme] || themes.light;
+  }, [theme]);
+
+  const handleChangeTheme = () => {
+    setTheme((prev: Theme): Theme => (prev === "dark" ? "light" : "dark"));
+  };
+
+  return (
+    <ThemeProvider theme={currentTheme}>
+      <GlobalStyle />
+      <h1>Pokedex</h1>
+      <button onClick={handleChangeTheme}>
+        {theme === "dark" ? "light" : "dark"}
+      </button>
+    </ThemeProvider>
+  );
+}
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <AppWithTheme />;
 }
 
 export default App;
