@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { ThemeProvider } from "styled-components";
+import PokemonGrid from "./components/PokemonGrid";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { GlobalStyle } from "./styles/global";
 import themes from "./styles/themes";
@@ -21,6 +22,7 @@ function AppWithTheme() {
     <ThemeProvider theme={currentTheme}>
       <GlobalStyle />
       <h1>Pokedex</h1>
+      <PokemonGrid />
       <button onClick={handleChangeTheme}>
         {theme === "dark" ? "light" : "dark"}
       </button>

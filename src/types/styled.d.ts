@@ -11,6 +11,7 @@ declare module 'styled-components' {
     borderRadius: string;
 		backgroundColor: string;
 		textColor: string;
+		idTextColor: string;
 		headerBackgroundColor: string;
 		footerBackgroundColor: string;
 		postBackgroundColor: string;
