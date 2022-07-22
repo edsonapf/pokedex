@@ -3,8 +3,9 @@ import commonStyles from './common';
 const dark =  {
   ...commonStyles,
   backgroundColor: '#222',
-  textColor: '#fff',
-	idTextColor: '#aaa',
+  cardBackgroundColor: '#fff',
+  textColor: '#041330',
+	idTextColor: '#828f98',
   headerBackgroundColor: '#111',
   footerBackgroundColor: '#111',
   postBackgroundColor: '#333',

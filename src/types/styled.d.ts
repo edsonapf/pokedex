@@ -10,6 +10,7 @@ declare module 'styled-components' {
 
     borderRadius: string;
 		backgroundColor: string;
+		cardBackgroundColor: string;
 		textColor: string;
 		idTextColor: string;
 		headerBackgroundColor: string;
