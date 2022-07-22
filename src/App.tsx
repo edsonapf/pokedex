@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { ThemeProvider } from "styled-components";
+import NavBar from "./components/NavBar";
 import useLocalStorage from "./hooks/useLocalStorage";
 import Home from "./pages/Home";
 import { GlobalStyle } from "./styles/global";
@@ -21,7 +22,7 @@ function AppWithTheme() {
   return (
     <ThemeProvider theme={currentTheme}>
       <GlobalStyle />
-      <h1>Pokedex</h1>
+      <NavBar />
       <Home />
       <button onClick={handleChangeTheme}>
         {theme === "dark" ? "light" : "dark"}
