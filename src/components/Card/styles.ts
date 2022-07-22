@@ -14,13 +14,19 @@ export const Container = styled.div`
 	justify-content: space-around;
 	align-items: center;
 	box-shadow: 2px 2px 10px -6px rgba(0,0,0,0.6);
-	height: 10rem;
-	width: 15rem;
+	height: 12rem;
+	width: 17rem;
 	position: relative;
+`
+
+export const ImageContainer = styled.div`
+	position: absolute;
+	display: flex;
+	top: -3.75rem;
+	height: 100px;
 
 	img {
-		position: absolute;
-		top: -1.75rem;
+		object-fit: none;
 	}
 `
 
@@ -29,30 +35,31 @@ export const InfoContainer = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
-`
+`;
 
 export const NameText = styled.span`
 	color: ${({ theme }) => theme.textColor};
 	font-size: 1.75rem;
 	font-weight: bold;
-`
+`;
 
 export const IdText = styled.span`
 	color: ${({ theme }) => theme.idTextColor};
 	font-size: 0.8rem;
 	font-weight: bold;
-`
+	margin-top: 1.5rem;
+`;
 
 export const TypeContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin: 0.5rem;
+	margin: 0.5rem 0 0.75rem 0;
 
 	span + span {
 		margin-left: 0.25rem;
 	}
-`
+`;
 
 export const TypeText = styled.span<TypeTextProps>`
 	color: ${({ fontColor }) => fontColor};
@@ -61,7 +68,7 @@ export const TypeText = styled.span<TypeTextProps>`
 	font-weight: bold;
 	border-radius: 0.25rem;
 	padding: 0.25rem;
-`
+`;
 
 export const MoreInfoButton = styled.button`
 	color: ${({ theme }) => theme.textColor};
@@ -76,4 +83,4 @@ export const MoreInfoButton = styled.button`
 		background: ${({ theme }) => theme.textColor};
 		cursor: pointer;
 	}
-`
+`;

@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { ThemeProvider } from "styled-components";
-import PokemonCard from "./components/PokemonCard";
+import Card from "./components/Card";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { GlobalStyle } from "./styles/global";
 import themes from "./styles/themes";
@@ -30,11 +30,11 @@ function AppWithTheme() {
           padding: "0 2rem",
         }}
       >
-        <PokemonCard />
-        <PokemonCard />
-        <PokemonCard />
-        <PokemonCard />
-        <PokemonCard />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
       </div>
       <button onClick={handleChangeTheme}>
         {theme === "dark" ? "light" : "dark"}

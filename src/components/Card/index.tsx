@@ -1,6 +1,7 @@
 import {
   Container,
   IdText,
+  ImageContainer,
   InfoContainer,
   MoreInfoButton,
   NameText,
@@ -13,13 +14,21 @@ const TYPE = [
   { name: "GROUND", backgroundColor: "#FFCD82", color: "#98693D" },
 ];
 
-const gif =
-  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif";
+// const gif =
+//   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif";
 
-function PokemonCard() {
+const gif =
+  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/395.gif";
+
+// const gif =
+//   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/392.gif";
+
+function Card() {
   return (
     <Container>
-      <img src={gif} alt="pokemon gif" />
+      <ImageContainer>
+        <img src={gif} alt="pokemon gif" />
+      </ImageContainer>
       <InfoContainer>
         <IdText>Nº 13</IdText>
         <NameText>Turtwig</NameText>
@@ -41,4 +50,4 @@ function PokemonCard() {
   );
 }
 
-export default PokemonCard;
+export default Card;
