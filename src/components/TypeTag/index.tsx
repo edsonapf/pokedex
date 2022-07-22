@@ -1,15 +1,26 @@
+import React from "react";
 import { Text } from "./styles";
 
 interface TypeTagProps {
-  title: string;
+  children: React.ReactNode;
   backgroundColor: string;
   fontColor: string;
+  className: string;
 }
 
-function TypeTag({ title, backgroundColor, fontColor }: TypeTagProps) {
+function TypeTag({
+  children,
+  backgroundColor,
+  fontColor,
+  className,
+}: TypeTagProps) {
   return (
-    <Text backgroundColor={backgroundColor} fontColor={fontColor}>
-      {title}
+    <Text
+      backgroundColor={backgroundColor}
+      fontColor={fontColor}
+      className={className}
+    >
+      {children}
     </Text>
   );
 }

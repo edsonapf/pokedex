@@ -1,3 +1,5 @@
+import TypeTag from "../TypeTag";
+import DetailsCardContainer from "../DetailsCardContainer";
 import {
   Container,
   IdText,
@@ -5,46 +7,46 @@ import {
   InfoContainer,
   MoreInfoButton,
   NameText,
-  TypeContainer,
-  TypeText,
+  PokedexButton,
 } from "./styles";
+import "../../mocks/pokemon_list.json";
+import { PokemonSimpleData } from "../../pages/Home";
+import StringUtils from "../../utils/StringUtils";
 
-const TYPE = [
-  { name: "GRASS", backgroundColor: "#A8F082", color: "#669F4E" },
-  { name: "GROUND", backgroundColor: "#FFCD82", color: "#98693D" },
-];
+interface CardProps {
+  content: PokemonSimpleData;
+}
 
-// const gif =
-//   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif";
-
-const gif =
-  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/395.gif";
-
-// const gif =
-//   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/392.gif";
-
-function Card() {
+function Card({ content }: CardProps) {
   return (
     <Container>
       <ImageContainer>
-        <img src={gif} alt="pokemon gif" />
+        <img src={content.image} alt={content.name} />
       </ImageContainer>
       <InfoContainer>
-        <IdText>Nº 13</IdText>
-        <NameText>Turtwig</NameText>
-        <TypeContainer>
-          {TYPE.map((type) => {
+        <IdText>Nº {content.id}</IdText>
+        <NameText>{StringUtils.formatNameCamelCase(content.name)}</NameText>
+        <DetailsCardContainer>
+          {content.types.map((type) => {
             return (
-              <TypeText
+              <TypeTag
                 backgroundColor={type.backgroundColor}
                 fontColor={type.color}
+                className="details-card-container-child"
               >
                 {type.name}
-              </TypeText>
+              </TypeTag>
             );
           })}
-        </TypeContainer>
-        <MoreInfoButton>More info</MoreInfoButton>
+        </DetailsCardContainer>
+        <DetailsCardContainer>
+          <MoreInfoButton className="details-card-container-child">
+            More info
+          </MoreInfoButton>
+          <PokedexButton className="details-card-container-child">
+            + Pokedex
+          </PokedexButton>
+        </DetailsCardContainer>
       </InfoContainer>
     </Container>
   );
