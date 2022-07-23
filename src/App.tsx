@@ -1,8 +1,7 @@
 import { useMemo } from "react";
 import { ThemeProvider } from "styled-components";
-import NavBar from "./components/NavBar";
+import CustomRoutes from "./CustomRoutes";
 import useLocalStorage from "./hooks/useLocalStorage";
-import Home from "./pages/Home";
 import { GlobalStyle } from "./styles/global";
 import themes from "./styles/themes";
 
@@ -22,8 +21,7 @@ function AppWithTheme() {
   return (
     <ThemeProvider theme={currentTheme}>
       <GlobalStyle />
-      <NavBar />
-      <Home />
+      <CustomRoutes />
       <button onClick={handleChangeTheme}>
         {theme === "dark" ? "light" : "dark"}
       </button>

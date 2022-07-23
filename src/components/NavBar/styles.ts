@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { ReactComponent as PokemonLogoSvg } from '../../assets/logo/pokemon.svg';
 import { ReactComponent as PokeballIconSvg } from "../../assets/icons/pokeball.svg";
+import { Link } from 'react-router-dom';
 
 export const Nav = styled.nav`
 	background: ${({ theme }) => theme.cardBackgroundColor};
@@ -93,7 +94,7 @@ export const Li = styled.li`
 	}
 `;
 
-export const PageLink = styled.a`
+export const PageLink = styled(Link)`
 	color: inherit;
 	font-size: 1.5rem;
 	text-decoration: none;

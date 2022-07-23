@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { MdHome } from "react-icons/md";
+import { useLocation } from "react-router-dom";
 import {
   Li,
   LogoContainer,
@@ -9,11 +11,11 @@ import {
   PokeballIcon,
   PokemonLogo,
 } from "./styles";
-import { MdHome } from "react-icons/md";
 import useWindowDimension from "../../hooks/useWindowDimension";
 
 function NavBar() {
   const [openClass, setOpenClass] = useState("");
+  const location = useLocation();
   const { innerWidth } = useWindowDimension();
 
   useEffect(() => {
@@ -26,19 +28,27 @@ function NavBar() {
     setOpenClass((prev) => (prev === "open" ? "" : "open"));
   };
 
+  const getActivePage = (path: string) => {
+    if (path === location.pathname) {
+      return "active";
+    }
+
+    return "";
+  };
+
   return (
     <Nav>
       <LogoContainer>
         <PokemonLogo />
       </LogoContainer>
       <ul className={openClass}>
-        <Li className="active">
+        <Li className={getActivePage("/")}>
           <MdHome size={23} />
-          <PageLink href="/">Home</PageLink>
+          <PageLink to="/">Home</PageLink>
         </Li>
-        <Li>
+        <Li className={getActivePage("/pokedex")}>
           <PokeballIcon />
-          <PageLink href="/pokedex">Pokedex</PageLink>
+          <PageLink to="/pokedex">Pokedex</PageLink>
         </Li>
       </ul>
 
