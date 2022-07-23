@@ -15,11 +15,12 @@ import StringUtils from "../../utils/StringUtils";
 
 interface CardProps {
   content: PokemonSimpleData;
+  key?: string;
 }
 
-function Card({ content }: CardProps) {
+function Card({ content, key = "" }: CardProps) {
   return (
-    <Container>
+    <Container key={key}>
       <ImageContainer>
         <img src={content.image} alt={content.name} />
       </ImageContainer>
@@ -30,6 +31,7 @@ function Card({ content }: CardProps) {
           {content.types.map((type) => {
             return (
               <TypeTag
+                key={type.name}
                 backgroundColor={type.backgroundColor}
                 fontColor={type.color}
                 className="details-card-container-child"

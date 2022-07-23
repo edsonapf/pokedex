@@ -23,7 +23,6 @@ interface InfoCardProps {
 }
 
 function InfoCard({ content }: InfoCardProps) {
-  console.log({ content });
   return (
     <Container>
       <ImageContainer>
@@ -36,6 +35,7 @@ function InfoCard({ content }: InfoCardProps) {
           {content.types.map((type) => {
             return (
               <TypeTag
+                key={type.name}
                 backgroundColor={type.backgroundColor}
                 fontColor={type.color}
                 className="details-card-container-child"
@@ -49,7 +49,11 @@ function InfoCard({ content }: InfoCardProps) {
           <DetailTitleText>ABILITIES</DetailTitleText>
           <DetailSection>
             {content.abilities.map((ability) => {
-              return <DetailValueText>{ability.name}</DetailValueText>;
+              return (
+                <DetailValueText key={ability.name}>
+                  {ability.name}
+                </DetailValueText>
+              );
             })}
           </DetailSection>
         </DetailsContainer>
@@ -72,7 +76,7 @@ function InfoCard({ content }: InfoCardProps) {
           <HeightWeightContainer>
             {content.stats.map((stat) => {
               return (
-                <StatBubble>
+                <StatBubble key={stat.name}>
                   <StatTypeText background={stat.color}>
                     {stat.name}
                   </StatTypeText>

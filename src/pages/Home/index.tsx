@@ -11,7 +11,7 @@ function Home() {
   return (
     <Container>
       {pokemonList.map((pokemon) => {
-        return <Card content={pokemon} />;
+        return <Card content={pokemon} key={pokemon.name} />;
       })}
       <div style={{ marginTop: 100 }}>
         <InfoCard content={pokemonDetail} />
