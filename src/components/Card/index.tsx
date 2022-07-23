@@ -12,13 +12,24 @@ import {
 import "../../mocks/pokemon_list.json";
 import { PokemonSimpleData } from "../../pages/Home";
 import StringUtils from "../../utils/StringUtils";
+import { useContext } from "react";
+import { PokedexContext } from "../../context/PokedexContext";
 
 interface CardProps {
   content: PokemonSimpleData;
   key?: string;
+  showAddToPokedexButton?: boolean;
+  showRemoveFromPokedexButton?: boolean;
 }
 
-function Card({ content, key = "" }: CardProps) {
+function Card({
+  content,
+  key = "",
+  showAddToPokedexButton = false,
+  showRemoveFromPokedexButton = false,
+}: CardProps) {
+  const { addToPokedex, removeFromPokedex } = useContext(PokedexContext);
+
   return (
     <Container key={key}>
       <ImageContainer>
@@ -45,9 +56,22 @@ function Card({ content, key = "" }: CardProps) {
           <MoreInfoButton className="details-card-container-child">
             More info
           </MoreInfoButton>
-          <PokedexButton className="details-card-container-child">
-            + Pokedex
-          </PokedexButton>
+          {showAddToPokedexButton && (
+            <PokedexButton
+              className="details-card-container-child"
+              onClick={() => addToPokedex(content)}
+            >
+              + Pokedex
+            </PokedexButton>
+          )}
+          {showRemoveFromPokedexButton && (
+            <PokedexButton
+              className="details-card-container-child"
+              onClick={() => removeFromPokedex(content.id)}
+            >
+              - Pokedex
+            </PokedexButton>
+          )}
         </DetailsCardContainer>
       </InfoContainer>
     </Container>
