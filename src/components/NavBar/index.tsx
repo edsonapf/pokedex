@@ -1,16 +1,17 @@
-import { Nav, PageLink, PageName } from "./styles";
+import { Li, LogoImg, Nav, PageLink } from "./styles";
+import pokemonLogo from "../../assets/logo/pokemon.svg";
 
 function NavBar() {
   return (
     <Nav>
-      <PageName href="/">Pokedex</PageName>
+      <LogoImg src={pokemonLogo} alt="Pokemon logo" />
       <ul>
-        <li>
+        <Li className="active">
           <PageLink href="/">Home</PageLink>
-        </li>
-        <li>
+        </Li>
+        <Li>
           <PageLink href="/pokedex">Pokedex</PageLink>
-        </li>
+        </Li>
       </ul>
     </Nav>
   );

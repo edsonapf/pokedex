@@ -21,5 +21,10 @@ export const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.textColor};
     font-family: sans-serif;
 		-webkit-font-smoothing: antialiased;
+    padding: 2rem 6rem;
+
+    @media (max-width: 720px) {
+      padding: 2rem 4rem;
+    }
   }
 `

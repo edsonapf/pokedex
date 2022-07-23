@@ -13,6 +13,7 @@ export const Container = styled.div`
 	border-radius: 2rem;
 	background: ${({ theme }) => theme.cardBackgroundColor};
 	position: relative;
+	box-shadow: 2px 2px 10px -6px rgba(0,0,0,0.6);
 
 	height: 27rem;
 	padding: 1rem;
