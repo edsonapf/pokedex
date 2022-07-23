@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { ThemeProvider } from "styled-components";
+import PokedexProvider from "./context/PokedexContext";
 import CustomRoutes from "./CustomRoutes";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { GlobalStyle } from "./styles/global";
@@ -22,15 +23,16 @@ function AppWithTheme() {
     <ThemeProvider theme={currentTheme}>
       <GlobalStyle />
       <CustomRoutes />
-      <button onClick={handleChangeTheme}>
-        {theme === "dark" ? "light" : "dark"}
-      </button>
     </ThemeProvider>
   );
 }
 
 function App() {
-  return <AppWithTheme />;
+  return (
+    <PokedexProvider>
+      <AppWithTheme />
+    </PokedexProvider>
+  );
 }
 
 export default App;
