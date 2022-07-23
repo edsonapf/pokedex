@@ -107,7 +107,6 @@ export const Menu = styled.button`
 	border-radius: 3px;
 	border: 1px solid #ff5350;
 	padding: 3px;
-	cursor: pointer;
 	width: 25px;
 	height: 20px;
 

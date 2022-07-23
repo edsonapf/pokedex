@@ -49,10 +49,6 @@ const Button = styled.button`
 	padding: 0.25rem;
 	font-weight: bold;
 	border-radius: 0.4rem;
-
-	&:hover {
-		cursor: pointer;
-	}
 `;
 
 export const MoreInfoButton = styled(Button)`

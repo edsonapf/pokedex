@@ -27,4 +27,8 @@ export const GlobalStyle = createGlobalStyle`
       padding: 2rem 4rem;
     }
   }
+
+  button {
+    cursor: pointer;
+  }
 `
