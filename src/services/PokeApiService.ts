@@ -1,20 +1,93 @@
-import { api } from './api'
+import { PokemonAbility, PokemonList } from '../types/Pokemon';
+import RequestConverter from '../utils/RequestConverter';
+import { api } from './api';
+
+export interface AxiosListRequest {
+	data: ListRequest;
+}
+
+export interface ListRequest {
+	next: string | null;
+	previous: string | null;
+	results: Result[];
+}
+
+export interface Result {
+	name: string;
+	url: string;
+}
+
+export interface AxiosGetByIdOrNameRequest {
+	data: GetByIdOrNameRequest;
+}
+
+export interface GetByIdOrNameRequest {
+	abilities: Ability[];
+	height: number;
+	id: number;
+	name: string;
+	sprites: Sprite;
+	stats: Stat[];
+	types: Type[];
+	weight: number;
+}
+
+export interface Ability {
+	ability: PokemonAbility;
+}
+
+export interface Sprite {
+	front_default: string;
+	versions: Versions;
+}
+
+export interface Stat {
+	base_stat: number;
+	stat: {
+		name: string;
+	}
+}
+
+export interface Type {
+	type: {
+		name: string;
+	}
+}
+
+export interface Versions {
+	"generation-v": {
+		"black-white": {
+			animated: {
+				front_default: string;
+			}
+		}
+	}
+}
+
 
 export default class PokeApiService {
 
-	static async listAll(limit: number, offset: number) {
-		const response = await api.get('/pokemon', {
+	static async listAll(offset: number = 0, limit: number = 20): Promise<PokemonList> {
+		const listResponse: AxiosListRequest = await api.get('/pokemon', {
 			params: {
-				...(limit && { limit }),
-				...(offset && { offset })
-			}
+				offset,
+				limit,
+			},
 		});
+		const PokemonDetailsRequest = listResponse.data.results.map((result) => {
+			const splittedUrl: string[] = result.url.split('/');
+			const id = splittedUrl[splittedUrl.length - 2];
+			
+			return this.getByIdOrName(id);
+		})
+		const pokemonsDetail: GetByIdOrNameRequest[] = await Promise.all(PokemonDetailsRequest);
+		const formattedPokemonDetails = pokemonsDetail.map((detail: GetByIdOrNameRequest) => RequestConverter.toPokemonDetails(detail));
 
-		return response.data;
+		return RequestConverter.toPokemonList(listResponse.data, formattedPokemonDetails);
 	}
 
-	static async getById(id: number) {
-		const response = await api.get(`/pokemon/${id}`);
+	static async getByIdOrName(pathParam: string): Promise<GetByIdOrNameRequest> {
+		const response: AxiosGetByIdOrNameRequest = await api.get(`/pokemon/${pathParam}`);
 
 		return response.data
 	}

@@ -9,14 +9,13 @@ import {
   NameText,
   PokedexButton,
 } from "./styles";
-import "../../mocks/pokemon_list.json";
-import { PokemonSimpleData } from "../../pages/Home";
 import StringUtils from "../../utils/StringUtils";
 import { useContext } from "react";
 import { PokedexContext } from "../../context/PokedexContext";
+import { PokemonDetails } from "../../types/Pokemon";
 
 interface CardProps {
-  content: PokemonSimpleData;
+  content: PokemonDetails;
   key?: string;
   showAddToPokedexButton?: boolean;
   showRemoveFromPokedexButton?: boolean;
@@ -33,7 +32,7 @@ function Card({
   return (
     <Container key={key}>
       <ImageContainer>
-        <img src={content.image} alt={content.name} />
+        <img src={content.animatedImage} alt={content.name} />
       </ImageContainer>
       <InfoContainer>
         <IdText>Nº {content.id}</IdText>
@@ -47,7 +46,7 @@ function Card({
                 fontColor={type.color}
                 className="details-card-container-child"
               >
-                {type.name}
+                {type.name.toUpperCase()}
               </TypeTag>
             );
           })}

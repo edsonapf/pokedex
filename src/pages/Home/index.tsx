@@ -1,46 +1,162 @@
-import { ButtonsContainer, Container, PageButton } from "./styles";
-import pokemonList from "../../mocks/pokemon_list.json";
+import {
+  ButtonsContainer,
+  Container,
+  FiltersContainer,
+  PageButton,
+  PokeballIcon,
+} from "./styles";
 import Card from "../../components/Card";
 // import InfoCard from "../../components/InfoCard";
-import pokemonDetail from "../../mocks/pokemon_detail.json";
 import SearchBar from "../../components/SearchBar";
 import PokemonListContainer from "../../components/PokemonListContainer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { PokemonDetails, PokemonList } from "../../types/Pokemon";
+import PokeApiService from "../../services/PokeApiService";
+import Chip from "../../components/Chip";
+import RequestConverter from "../../utils/RequestConverter";
+import { EmptyPokedexContainer, EmptyPokedexText } from "../Pokedex/styles";
 
-export type PokemonDetail = typeof pokemonDetail;
-export type PokemonSimpleData = typeof pokemonList[0];
+const defaultPokemonList: PokemonList = {
+  next: null,
+  previous: null,
+  pokemons: [],
+};
 
 function Home() {
-  const [pokemonSearch, setPokemonSearch] = useState("");
+  const [pokemonName, setPokemonName] = useState("");
+  const [isFilteredByName, setIsFilteredByName] = useState(false);
+  const [page, setPage] = useState(1);
+  const [pokemonList, setPokemonList] = useState(defaultPokemonList);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPokemonSearch(event.target.value);
+  useEffect(() => {
+    listAll();
+  }, []);
+
+  const handleNextPage = () => {
+    if (pokemonList.next) {
+      const { offset, limit } = getOffsetAndLimitFromUrl(pokemonList.next);
+      listAll(offset, limit);
+      setPage((prev) => prev + 1);
+    }
   };
 
-  console.log({ pokemonSearch });
+  const handleBackPage = () => {
+    if (pokemonList.previous) {
+      const { offset, limit } = getOffsetAndLimitFromUrl(pokemonList.previous);
+      listAll(offset, limit);
+      setPage((prev) => prev - 1);
+    }
+  };
+
+  const listAll = async (offset: number = 0, limit: number = 20) => {
+    setIsLoading(true);
+    const response = await PokeApiService.listAll(offset, limit);
+    setPokemonList(response);
+    setIsLoading(false);
+  };
+
+  const getOffsetAndLimitFromUrl = (url: string) => {
+    const allQueryParams = url.split("?")[1];
+    const individualQueryParams = allQueryParams.split("&");
+    const offset = individualQueryParams[0].match(/\d+/);
+    const limit = individualQueryParams[1].match(/\d+/);
+
+    if (offset && limit) {
+      return {
+        offset: Number(offset[0]),
+        limit: Number(limit[0]),
+      };
+    }
+
+    return {
+      offset: 0,
+      limit: 20,
+    };
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPokemonName(event.target.value);
+  };
+
+  const handleSearchButtonPress = async () => {
+    if (pokemonName) {
+      try {
+        const response = await PokeApiService.getByIdOrName(pokemonName);
+        const formattedPokemonList: PokemonList = {
+          next: null,
+          previous: null,
+          pokemons: [RequestConverter.toPokemonDetails(response)],
+        };
+        setIsFilteredByName(true);
+        setPokemonList(formattedPokemonList);
+      } catch {
+        console.log("error");
+      }
+    }
+  };
+
+  const handleRemoveSearch = () => {
+    setIsFilteredByName(false);
+    setPokemonName("");
+    listAll();
+  };
 
   return (
     <Container>
-      <SearchBar onInputChange={handleSearchChange} />
-      <ButtonsContainer>
-        <PageButton className="button-container-child">{"<<"}</PageButton>
-        <PageButton className="button-container-child">{"<"}</PageButton>
-        <PageButton className="button-container-child" disabled>
-          1
-        </PageButton>
-        <PageButton className="button-container-child">{">"}</PageButton>
-        <PageButton className="button-container-child">{">>"}</PageButton>
-      </ButtonsContainer>
-      <PokemonListContainer>
-        {pokemonList.map((pokemon) => {
-          return (
-            <Card content={pokemon} key={pokemon.name} showAddToPokedexButton />
-          );
-        })}
-        {/* <div style={{ marginTop: 100 }}>
-          <InfoCard content={pokemonDetail} />
-        </div> */}
-      </PokemonListContainer>
+      <SearchBar
+        value={pokemonName}
+        onInputChange={handleSearchChange}
+        onSearchButtonPress={handleSearchButtonPress}
+      />
+      <FiltersContainer>
+        <ButtonsContainer>
+          <PageButton
+            className="button-container-child"
+            disabled={!pokemonList.previous}
+            onClick={handleBackPage}
+          >
+            {"<"}
+          </PageButton>
+          <PageButton className="button-container-child" disabled>
+            {page}
+          </PageButton>
+          <PageButton
+            className="button-container-child"
+            disabled={!pokemonList.next}
+            onClick={handleNextPage}
+          >
+            {">"}
+          </PageButton>
+        </ButtonsContainer>
+        {isFilteredByName && (
+          <Chip text={pokemonName} onRemoveChip={handleRemoveSearch} />
+        )}
+      </FiltersContainer>
+      <div style={{ paddingTop: "2rem" }}>
+        {/* TODO: Change EmptyPokedexContainer */}
+        {isLoading ? (
+          <EmptyPokedexContainer>
+            <PokeballIcon />
+            <EmptyPokedexText>Loading...</EmptyPokedexText>
+          </EmptyPokedexContainer>
+        ) : (
+          <PokemonListContainer>
+            {pokemonList.pokemons.map((pokemon: PokemonDetails) => {
+              return (
+                <Card
+                  content={pokemon}
+                  key={pokemon.name}
+                  showAddToPokedexButton
+                />
+              );
+            })}
+            {/* <div style={{ marginTop: 100 }}>
+              <InfoCard content={pokemonDetail} />
+            </div> */}
+          </PokemonListContainer>
+        )}
+      </div>
     </Container>
   );
 }

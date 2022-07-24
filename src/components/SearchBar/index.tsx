@@ -3,17 +3,24 @@ import { Container, Input, SearchButton } from "./styles";
 
 interface SearchBarProps {
   onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onSearchButtonPress: () => void;
+  value: string;
 }
 
-function SearchBar({ onInputChange }: SearchBarProps) {
+function SearchBar({
+  onInputChange,
+  onSearchButtonPress,
+  value,
+}: SearchBarProps) {
   return (
     <Container>
       <Input
         onChange={onInputChange}
+        value={value}
         type="text"
         placeholder="Search a pokemon by id or name"
       />
-      <SearchButton>
+      <SearchButton onClick={onSearchButtonPress}>
         <MdSearch size={20} />
       </SearchButton>
     </Container>

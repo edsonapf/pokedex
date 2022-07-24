@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ReactComponent as PokeballIconSvg } from "../../assets/icons/pokeball.svg";
 
 export const Container = styled.main`
 	display: flex;
@@ -7,10 +8,15 @@ export const Container = styled.main`
 	padding-top: 2rem;
 `;
 
-export const ButtonsContainer = styled.div`
+export const FiltersContainer = styled.div`
 	width: 100%;
-	margin-top: 2rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 2rem
+`
 
+export const ButtonsContainer = styled.div`
 	.button-container-child:not(:first-child) {
 		margin-left: 0.3rem;
 	}
@@ -29,4 +35,21 @@ export const PageButton = styled.button`
 		&:disabled {
 			cursor: default;
 		}
+`;
+
+export const PokeballIcon = styled(PokeballIconSvg)`
+	width: 3rem;
+	height: 3rem;
+  margin-bottom: 1rem;
+  fill: #777;
+	animation: rotation 2s infinite linear;
+	
+	@keyframes rotation {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(359deg);
+		}
+	}
 `;

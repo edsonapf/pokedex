@@ -1,14 +1,14 @@
 import { createContext, ReactNode } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { PokemonSimpleData } from "../pages/Home";
+import { PokemonDetails } from "../types/Pokemon";
 
 interface PokedexProviderProps {
   children: ReactNode;
 }
 
 interface PokedexContextProps {
-  pokedex: PokemonSimpleData[];
-  addToPokedex: (pokemon: PokemonSimpleData) => void;
+  pokedex: PokemonDetails[];
+  addToPokedex: (pokemon: PokemonDetails) => void;
   removeFromPokedex: (pokemonId: number) => void;
 }
 
@@ -27,12 +27,12 @@ export const PokedexContext = createContext<PokedexContextProps>(
 );
 
 function PokedexProvider({ children }: PokedexProviderProps) {
-  const [pokedex, setPokedex] = useLocalStorage<PokemonSimpleData[]>(
+  const [pokedex, setPokedex] = useLocalStorage<PokemonDetails[]>(
     "pokedex",
     []
   );
 
-  const addToPokedex = (pokemon: PokemonSimpleData) => {
+  const addToPokedex = (pokemon: PokemonDetails) => {
     setPokedex((prevPokedex) => {
       if (pokemonIsAlreadyInPokedex(prevPokedex, pokemon)) {
         return prevPokedex;
@@ -43,8 +43,8 @@ function PokedexProvider({ children }: PokedexProviderProps) {
   };
 
   const pokemonIsAlreadyInPokedex = (
-    pokedex: PokemonSimpleData[],
-    pokemon: PokemonSimpleData
+    pokedex: PokemonDetails[],
+    pokemon: PokemonDetails
   ) => {
     return pokedex.find((item) => item.id === pokemon.id);
   };

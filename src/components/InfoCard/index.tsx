@@ -1,4 +1,4 @@
-import { PokemonDetail } from "../../pages/Home";
+import { PokemonDetails } from "../../types/Pokemon";
 import StringUtils from "../../utils/StringUtils";
 import DetailsCardContainer from "../DetailsCardContainer";
 import TypeTag from "../TypeTag";
@@ -19,7 +19,7 @@ import {
 } from "./styles";
 
 interface InfoCardProps {
-  content: PokemonDetail;
+  content: PokemonDetails;
 }
 
 function InfoCard({ content }: InfoCardProps) {
@@ -40,7 +40,7 @@ function InfoCard({ content }: InfoCardProps) {
                 fontColor={type.color}
                 className="details-card-container-child"
               >
-                {type.name}
+                {type.name.toUpperCase()}
               </TypeTag>
             );
           })}
