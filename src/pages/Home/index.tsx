@@ -185,9 +185,6 @@ function Home() {
                 />
               );
             })}
-            {/* <div style={{ marginTop: 100 }}>
-              <InfoCard content={pokemonDetail} />
-            </div> */}
           </PokemonListContainer>
         )}
       </div>
