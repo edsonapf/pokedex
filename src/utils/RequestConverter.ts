@@ -14,11 +14,13 @@ class RequestConverter {
   }
 
   static toPokemonDetails(fullDetail: GetByIdOrNameRequest): PokemonDetails {
+    const imageLastIndexOfUrl = fullDetail.sprites.front_default.lastIndexOf('http');
+    const animatedImageLastIndexOfUrl = fullDetail.sprites.versions["generation-v"]["black-white"].animated.front_default.lastIndexOf('http');
     return {
       id: fullDetail.id,
       name: fullDetail.name,
-      image: fullDetail.sprites.front_default,
-      animatedImage: fullDetail.sprites.versions["generation-v"]["black-white"].animated.front_default,
+      image: fullDetail.sprites.front_default.substring(imageLastIndexOfUrl),
+      animatedImage: fullDetail.sprites.versions["generation-v"]["black-white"].animated.front_default.substring(animatedImageLastIndexOfUrl),
       types: fullDetail.types.map((type: Type) => {
         const { backgroundColor, color } = ColorSelector.getColorsByPokemonType(type.type.name.toUpperCase());
         return {
