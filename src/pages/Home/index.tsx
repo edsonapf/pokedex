@@ -108,10 +108,12 @@ function Home() {
         };
         setIsFilteredByName(true);
         setPokemonList(formattedPokemonList);
+        setPage(1);
       } catch {
         setSearchedPokemon("");
         setIsFilteredByName(false);
-        listAll();
+        const offset = (page - 1) * 20;
+        listAll(offset);
         toast.error("Pokemon not found", {
           position: toast.POSITION.BOTTOM_LEFT,
         });

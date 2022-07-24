@@ -8,7 +8,7 @@ interface ChipProps {
 function Chip({ text, onRemoveChip }: ChipProps) {
   return (
     <Container>
-      <span>{text}</span>
+      <span>{text.toLowerCase()}</span>
       <CloseButton onClick={onRemoveChip}>X</CloseButton>
     </Container>
   );

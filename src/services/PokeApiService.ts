@@ -87,7 +87,7 @@ export default class PokeApiService {
 	}
 
 	static async getByIdOrName(pathParam: string): Promise<GetByIdOrNameRequest> {
-		const response: AxiosGetByIdOrNameRequest = await api.get(`/pokemon/${pathParam}`);
+		const response: AxiosGetByIdOrNameRequest = await api.get(`/pokemon/${pathParam.toLowerCase()}`);
 
 		return response.data
 	}

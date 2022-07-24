@@ -12,6 +12,12 @@ function SearchBar({
   onSearchButtonPress,
   value,
 }: SearchBarProps) {
+  const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.code === "Enter") {
+      onSearchButtonPress();
+    }
+  };
+
   return (
     <Container>
       <Input
@@ -19,6 +25,7 @@ function SearchBar({
         value={value}
         type="text"
         placeholder="Search a pokemon by id or name"
+        onKeyUp={handleKeyUp}
       />
       <SearchButton onClick={onSearchButtonPress}>
         <MdSearch size={20} />
