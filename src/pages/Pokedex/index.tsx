@@ -1,9 +1,4 @@
-import {
-  Container,
-  EmptyPokedexContainer,
-  EmptyPokedexText,
-  PokeballIcon,
-} from "./styles";
+import { Container, PokeballIcon } from "./styles";
 import PokemonListContainer from "../../components/PokemonListContainer";
 import Card from "../../components/Card";
 import { useContext, useEffect, useMemo, useState } from "react";
@@ -11,6 +6,7 @@ import { PokedexContext } from "../../context/PokedexContext";
 import { PokemonDetails } from "../../types/Pokemon";
 import Modal from "../../components/Modal";
 import InfoCard from "../../components/InfoCard";
+import EmptyOrLoadingContainer from "../../components/EmptyOrLoadingContainer";
 
 function Pokedex() {
   const { pokedex } = useContext(PokedexContext);
@@ -49,12 +45,9 @@ function Pokedex() {
           })}
         </PokemonListContainer>
       ) : (
-        <EmptyPokedexContainer>
+        <EmptyOrLoadingContainer text="You do not have pokemon in your pokedex">
           <PokeballIcon />
-          <EmptyPokedexText>
-            You do not have pokemon in your pokedex
-          </EmptyPokedexText>
-        </EmptyPokedexContainer>
+        </EmptyOrLoadingContainer>
       )}
     </Container>
   );

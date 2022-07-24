@@ -14,9 +14,9 @@ import { PokemonDetails, PokemonList } from "../../types/Pokemon";
 import PokeApiService from "../../services/PokeApiService";
 import Chip from "../../components/Chip";
 import RequestConverter from "../../utils/RequestConverter";
-import { EmptyPokedexContainer, EmptyPokedexText } from "../Pokedex/styles";
 import { toast } from "react-toastify";
 import Modal from "../../components/Modal";
+import EmptyOrLoadingContainer from "../../components/EmptyOrLoadingContainer";
 
 const defaultPokemonList: PokemonList = {
   next: null,
@@ -169,10 +169,9 @@ function Home() {
       <div style={{ paddingTop: "2rem" }}>
         {/* TODO: Change EmptyPokedexContainer */}
         {isLoading ? (
-          <EmptyPokedexContainer>
+          <EmptyOrLoadingContainer text="Loading...">
             <PokeballIcon />
-            <EmptyPokedexText>Loading...</EmptyPokedexText>
-          </EmptyPokedexContainer>
+          </EmptyOrLoadingContainer>
         ) : (
           <PokemonListContainer>
             {pokemonList.pokemons.map((pokemon: PokemonDetails) => {
