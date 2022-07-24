@@ -8,8 +8,14 @@ interface ModalProps {
 }
 
 function Modal({ children, onCloseModal }: ModalProps) {
+  const handleCloseModal = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (event.target === event.currentTarget) {
+      onCloseModal();
+    }
+  };
+
   return ReactDOM.createPortal(
-    <Backdrop onClick={onCloseModal}>{children}</Backdrop>,
+    <Backdrop onClick={handleCloseModal}>{children}</Backdrop>,
     document.getElementById("modal-root")!
   );
 }
