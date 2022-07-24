@@ -1,5 +1,5 @@
 import { Ability, GetByIdOrNameRequest, ListRequest, Stat, Type } from "../services/PokeApiService";
-import { PokemonDetails, PokemonList } from "../types/Pokemon";
+import { PokemonDetails, PokemonList, PokemonStats } from "../types/Pokemon";
 import ColorSelector from "./ColorSelector";
 import NameConverter from "./NameConverter";
 
@@ -31,14 +31,11 @@ class RequestConverter {
       })),
       height: fullDetail.height,
       weight: fullDetail.weight,
-      stats: fullDetail.stats.map((stat: Stat) => {
-        // TODO: remove other stats
-        return {
+      stats: fullDetail.stats.map((stat: Stat) => ({
           name: NameConverter.convertStatName(stat.stat.name),
           color: ColorSelector.getColorByStat(stat.stat.name),
           value: stat.base_stat,
-        }
-      })
+        })).filter((stat: PokemonStats) => stat.name !== 'TTL')
     }
 
   }

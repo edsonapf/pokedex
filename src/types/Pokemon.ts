@@ -3,7 +3,7 @@ export interface PokemonList {
   previous: string | null;
   pokemons: PokemonDetails[];
 }
-// TODO: create function to get color by type
+
 export interface PokemonDetails {
   id: number;
   name: string;

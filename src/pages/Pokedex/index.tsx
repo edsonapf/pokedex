@@ -22,6 +22,9 @@ function Pokedex() {
                 content={pokemon}
                 key={pokemon.name}
                 showRemoveFromPokedexButton
+                onMoreInfoButtonPress={() =>
+                  console.log("onMoreInfoButtonPress")
+                }
               />
             );
           })}
