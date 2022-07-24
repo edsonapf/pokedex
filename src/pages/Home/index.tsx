@@ -24,6 +24,8 @@ const defaultPokemonList: PokemonList = {
   pokemons: [],
 };
 
+const OFFSET_PAGE = 20;
+
 function Home() {
   const [pokemonName, setPokemonName] = useState("");
   const [searchedPokemon, setSearchedPokemon] = useState("");
@@ -38,21 +40,18 @@ function Home() {
   const isModalOpen = useMemo(() => !!selectedPokemon, [selectedPokemon]);
 
   useEffect(() => {
-    listAll();
-  }, []);
+    const offset = (page - 1) * OFFSET_PAGE;
+    listAll(offset);
+  }, [page]);
 
-  const handleNextPage = () => {
+  const handleNextPage = async () => {
     if (pokemonList.next) {
-      const { offset, limit } = getOffsetAndLimitFromUrl(pokemonList.next);
-      listAll(offset, limit);
       setPage((prev) => prev + 1);
     }
   };
 
-  const handleBackPage = () => {
+  const handleBackPage = async () => {
     if (pokemonList.previous) {
-      const { offset, limit } = getOffsetAndLimitFromUrl(pokemonList.previous);
-      listAll(offset, limit);
       setPage((prev) => prev - 1);
     }
   };
@@ -63,33 +62,6 @@ function Home() {
     setPokemonList(response);
     setIsLoading(false);
   };
-
-  const getOffsetAndLimitFromUrl = (url: string) => {
-    const allQueryParams = url.split("?")[1];
-    const individualQueryParams = allQueryParams.split("&");
-    const offset = individualQueryParams[0].match(/\d+/);
-    const limit = individualQueryParams[1].match(/\d+/);
-
-    if (offset && limit) {
-      return {
-        offset: Number(offset[0]),
-        limit: Number(limit[0]),
-      };
-    }
-
-    return {
-      offset: 0,
-      limit: 20,
-    };
-  };
-
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-  }, [isModalOpen]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPokemonName(event.target.value);
@@ -108,7 +80,6 @@ function Home() {
         };
         setIsFilteredByName(true);
         setPokemonList(formattedPokemonList);
-        setPage(1);
       } catch {
         setSearchedPokemon("");
         setIsFilteredByName(false);
@@ -118,6 +89,7 @@ function Home() {
           position: toast.POSITION.BOTTOM_LEFT,
         });
       } finally {
+        setPokemonName("");
         setIsLoading(false);
       }
     }
@@ -127,7 +99,8 @@ function Home() {
     setIsFilteredByName(false);
     setPokemonName("");
     setSearchedPokemon("");
-    listAll();
+    const offset = (page - 1) * 20;
+    listAll(offset);
   };
 
   return (
@@ -143,31 +116,36 @@ function Home() {
         onSearchButtonPress={handleSearchButtonPress}
       />
       <FiltersContainer>
-        <ButtonsContainer>
-          <PageButton
-            className="button-container-child"
-            disabled={!pokemonList.previous}
-            onClick={handleBackPage}
-          >
-            {"<"}
-          </PageButton>
-          <PageButton className="button-container-child" disabled>
-            {page}
-          </PageButton>
-          <PageButton
-            className="button-container-child"
-            disabled={!pokemonList.next}
-            onClick={handleNextPage}
-          >
-            {">"}
-          </PageButton>
-        </ButtonsContainer>
+        {!isFilteredByName && (
+          <ButtonsContainer>
+            {!!pokemonList.previous && (
+              <PageButton
+                className="button-container-child"
+                disabled={!pokemonList.previous}
+                onClick={handleBackPage}
+              >
+                {"<"}
+              </PageButton>
+            )}
+            <PageButton className="button-container-child" disabled>
+              {page}
+            </PageButton>
+            {!!pokemonList.next && (
+              <PageButton
+                className="button-container-child"
+                disabled={!pokemonList.next}
+                onClick={handleNextPage}
+              >
+                {">"}
+              </PageButton>
+            )}
+          </ButtonsContainer>
+        )}
         {isFilteredByName && (
           <Chip text={searchedPokemon} onRemoveChip={handleRemoveSearch} />
         )}
       </FiltersContainer>
       <div style={{ paddingTop: "2rem" }}>
-        {/* TODO: Change EmptyPokedexContainer */}
         {isLoading ? (
           <EmptyOrLoadingContainer text="Loading...">
             <PokeballIcon />
