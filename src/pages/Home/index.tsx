@@ -82,6 +82,14 @@ function Home() {
     };
   };
 
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isModalOpen]);
+
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPokemonName(event.target.value);
   };
