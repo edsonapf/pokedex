@@ -17,6 +17,10 @@ export const Container = styled.div`
 
 	height: 27rem;
 	padding: 1rem;
+
+	@media (max-width: 1080px) {
+		height: 29rem;
+	}
 `;
 
 export const ImageContainer = styled.div`
