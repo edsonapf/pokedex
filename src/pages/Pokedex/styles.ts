@@ -11,12 +11,12 @@ export const EmptyPokedexContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: ${({ theme }) => theme.cardBackgroundColor};
+  background: var(--white);
   padding: 2rem;
   text-align: center;
   margin-top: 2rem;
   border-radius: 1rem;
-  box-shadow: 2px 2px 10px -6px rgba(0,0,0,0.6);
+  box-shadow: var(--box-shadow);
 `;
 
 export const EmptyPokedexText = styled.span`

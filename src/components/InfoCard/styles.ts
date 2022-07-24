@@ -11,9 +11,9 @@ export const Container = styled.div`
 	align-items: center;
 	width: 20rem;
 	border-radius: 2rem;
-	background: ${({ theme }) => theme.cardBackgroundColor};
+	background: var(--white);
 	position: relative;
-	box-shadow: 2px 2px 10px -6px rgba(0,0,0,0.6);
+	box-shadow: var(--box-shadow);
 
 	height: 27rem;
 	padding: 1rem;
@@ -40,14 +40,14 @@ export const InfoContainer = styled.div`
 `;
 
 export const IdText = styled.span`
-	color: ${({ theme }) => theme.idTextColor};
+	color: var(--dark-gray);
 	font-size: 1rem;
 	font-weight: bold;
 	margin-top: 1.5rem;
 `;
 
 export const NameText = styled.span`
-	color: ${({ theme }) => theme.textColor};
+	color: var(--dark-blue);
 	font-size: 2rem;
 	font-weight: bold;
 `;
@@ -60,7 +60,7 @@ export const DetailsContainer = styled.div`
 `;
 
 const DetailText = styled.span`
-	color: ${({ theme }) => theme.textColor};
+	color: var(--dark-blue);
 	font-weight: bold;
 `
 
@@ -104,13 +104,13 @@ export const StatBubble = styled.div`
 	height: 4rem;
 	width: 2rem;
 	border-radius: 1rem;
-	background: ${({ theme }) => theme.backgroundColor};
+	background: var(--light-gray);
 	padding: 0 0.1rem
 `;
 
 export const StatTypeText = styled.span<StatTypeTextProps>`
 	border-radius: 1rem;
-	color: ${({ theme }) => theme.cardBackgroundColor};
+	color: var(--white);
 	background: ${({ background }) => background};
 	width: 100%;
 	font-size: 0.7rem;
@@ -120,7 +120,7 @@ export const StatTypeText = styled.span<StatTypeTextProps>`
 `;
 
 export const StatValueText = styled.span`
-	color: ${({ theme }) => theme.textColor};
+	color: var(--dark-blue);
 	font-size: 1rem;
 	text-align: center;
 	font-weight: bold;

@@ -1,6 +1,15 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+	:root {
+		--white: #fff;
+		--light-gray: #f6f8fc;
+		--dark-gray: #828f98;
+		--dark-blue: #041330;
+		--box-shadow: 2px 2px 10px -6px rgba(0,0,0,0.6);
+		--red: #ff5350;
+	}
+
 	* {
 		margin: 0;
 		padding: 0;
@@ -17,8 +26,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
 	body {
-    background: ${({ theme }) => theme.backgroundColor};
-    color: ${({ theme }) => theme.textColor};
+    background: var(--light-gray);
+    color: var(--dark-blue);
     font-family: sans-serif;
 		-webkit-font-smoothing: antialiased;
     padding: 2rem 6rem;

@@ -23,14 +23,14 @@ export const ButtonsContainer = styled.div`
 `;
 
 export const PageButton = styled.button`
-		background: ${({ theme }) => theme.cardBackgroundColor};
-		color: #ff5350;
+		background: var(--white);
+		color: var(--red);
 		border: none;
 		font-size: 1rem;
 		font-weight: bold;
 		padding: 0.5rem;
 		border-radius: 0.5rem;
-		box-shadow: 2px 2px 10px -6px rgba(0,0,0,0.6);
+		box-shadow: var(--box-shadow);
 
 		&:disabled {
 			cursor: default;

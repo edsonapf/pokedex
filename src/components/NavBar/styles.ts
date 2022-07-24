@@ -4,14 +4,14 @@ import { ReactComponent as PokeballIconSvg } from "../../assets/icons/pokeball.s
 import { Link } from 'react-router-dom';
 
 export const Nav = styled.nav`
-	background: ${({ theme }) => theme.cardBackgroundColor};
+	background: var(--white);
 	width: 100%;
 	padding: 0 2rem;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	box-shadow: 2px 2px 10px -6px rgba(0,0,0,0.6);
+	box-shadow: var(--box-shadow);
 	border-radius: 1rem;
 	height: 5rem;
 	gap: 2rem;
@@ -68,7 +68,7 @@ export const LogoImg = styled.img`
 
 export const PokemonLogo = styled(PokemonLogoSvg)`
 	width: 7rem;
-	fill: #ff5350;
+	fill: var(--red);
 
 	@media (max-width: 530px) {
 		height: 5rem;
@@ -84,9 +84,9 @@ export const Li = styled.li`
 	align-items: center;
 
 	&.active {
-		color: #ff5350;
-		fill: #ff5350;
-		border-bottom: 2px solid #ff5350;
+		color: var(--red);
+		fill: var(--red);
+		border-bottom: 2px solid var(--red);
 
 		@media (max-width: 530px) {
 			border-bottom: none;
@@ -106,7 +106,7 @@ export const Menu = styled.button`
 	display: none;
 	background: #fff;
 	border-radius: 3px;
-	border: 1px solid #ff5350;
+	border: 1px solid var(--red);
 	padding: 3px;
 	width: 25px;
 	height: 20px;
@@ -143,7 +143,7 @@ export const MenuLine = styled.div`
 	display: block;
 	width: 1.25rem;
 	height: 2px;
-	background: #ff5350;
+	background: var(--red);
 	transition: transform 0.5s, opacity 0.25s;
 `;
 

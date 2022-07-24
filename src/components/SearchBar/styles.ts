@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  background: ${({ theme }) => theme.cardBackgroundColor};
+  background: var(--white);
   width: 100%;
   padding: 1rem 0.75rem;
-  box-shadow: 2px 2px 10px -6px rgba(0,0,0,0.6);
+  box-shadow: var(--box-shadow);
   border-radius: 0.75rem;
 `
 
@@ -25,10 +25,10 @@ export const Input = styled.input`
 export const SearchButton = styled.button`
   display: flex;
   justify-content: center;
-  background: #ff5350;
+  background: var(--red);
   padding: 0.5rem 0.5rem;
   border: none;
-  box-shadow: 2px 2px 10px -6px rgba(0,0,0,0.6);
+  box-shadow: var(--box-shadow);
   border-radius: 0.5rem;
   color: white;
 `

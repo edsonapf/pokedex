@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 	border-radius: 1.5rem;
-	background: ${({ theme }) => theme.cardBackgroundColor};
+	background: var(--white);
 	margin-top: 2rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
-	box-shadow: 2px 2px 10px -6px rgba(0,0,0,0.6);
+	box-shadow: var(--box-shadow);
 	height: 12rem;
 	width: 15rem;
 	position: relative;
@@ -33,13 +33,13 @@ export const InfoContainer = styled.div`
 `;
 
 export const NameText = styled.span`
-	color: ${({ theme }) => theme.textColor};
+	color: var(--dark-blue);
 	font-size: 1.75rem;
 	font-weight: bold;
 `;
 
 export const IdText = styled.span`
-	color: ${({ theme }) => theme.idTextColor};
+	color: var(--dark-gray);
 	font-size: 0.8rem;
 	font-weight: bold;
 	margin-top: 1.5rem;
@@ -52,23 +52,23 @@ const Button = styled.button`
 `;
 
 export const MoreInfoButton = styled(Button)`
-	color: ${({ theme }) => theme.textColor};
-	background: ${({ theme }) => theme.cardBackgroundColor};
-	border: 1px solid ${({ theme }) => theme.textColor};
+	color: var(--dark-blue);
+	background: var(--white);
+	border: 1px solid var(--dark-blue);
 
 	&:hover {
-		color: ${({ theme }) => theme.backgroundColor};
-		background: ${({ theme }) => theme.textColor};
+		color: var(--light-gray);
+		background: var(--dark-blue);
 	}
 `;
 
 export const PokedexButton = styled(Button)`
-	color: #ff5350;
-	background: ${({ theme }) => theme.cardBackgroundColor};
-	border: 1px solid #ff5350;
+	color: var(--red);
+	background: var(--white);
+	border: 1px solid var(--red);
 
 	&:hover {
-		color: ${({ theme }) => theme.backgroundColor};
-		background: #ff5350;
+		color: var(--light-gray);
+		background: var(--red);
 	}
 `;
