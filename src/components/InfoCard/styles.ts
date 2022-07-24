@@ -74,6 +74,10 @@ export const DetailSection = styled.section`
 	justify-content: space-around;
 	width: 100%;
 	margin: 0.5rem 0;
+
+	span:not(:nth-child(1), :nth-child(2)) {
+		margin-top: 0.5rem;
+	}
 `;
 
 export const DetailValueText = styled(DetailText)`
