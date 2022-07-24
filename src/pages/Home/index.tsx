@@ -26,6 +26,7 @@ const defaultPokemonList: PokemonList = {
 
 function Home() {
   const [pokemonName, setPokemonName] = useState("");
+  const [searchedPokemon, setSearchedPokemon] = useState("");
   const [isFilteredByName, setIsFilteredByName] = useState(false);
   const [page, setPage] = useState(1);
   const [pokemonList, setPokemonList] = useState(defaultPokemonList);
@@ -97,6 +98,7 @@ function Home() {
   const handleSearchButtonPress = async () => {
     if (pokemonName) {
       try {
+        setSearchedPokemon(pokemonName);
         setIsLoading(true);
         const response = await PokeApiService.getByIdOrName(pokemonName);
         const formattedPokemonList: PokemonList = {
@@ -107,6 +109,9 @@ function Home() {
         setIsFilteredByName(true);
         setPokemonList(formattedPokemonList);
       } catch {
+        setSearchedPokemon("");
+        setIsFilteredByName(false);
+        listAll();
         toast.error("Pokemon not found", {
           position: toast.POSITION.BOTTOM_LEFT,
         });
@@ -119,6 +124,7 @@ function Home() {
   const handleRemoveSearch = () => {
     setIsFilteredByName(false);
     setPokemonName("");
+    setSearchedPokemon("");
     listAll();
   };
 
@@ -155,7 +161,7 @@ function Home() {
           </PageButton>
         </ButtonsContainer>
         {isFilteredByName && (
-          <Chip text={pokemonName} onRemoveChip={handleRemoveSearch} />
+          <Chip text={searchedPokemon} onRemoveChip={handleRemoveSearch} />
         )}
       </FiltersContainer>
       <div style={{ paddingTop: "2rem" }}>
