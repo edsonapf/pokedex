@@ -6,16 +6,17 @@ import {
   PokeballIcon,
 } from "./styles";
 import Card from "../../components/Card";
-// import InfoCard from "../../components/InfoCard";
+import InfoCard from "../../components/InfoCard";
 import SearchBar from "../../components/SearchBar";
 import PokemonListContainer from "../../components/PokemonListContainer";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { PokemonDetails, PokemonList } from "../../types/Pokemon";
 import PokeApiService from "../../services/PokeApiService";
 import Chip from "../../components/Chip";
 import RequestConverter from "../../utils/RequestConverter";
 import { EmptyPokedexContainer, EmptyPokedexText } from "../Pokedex/styles";
 import { toast } from "react-toastify";
+import Modal from "../../components/Modal";
 
 const defaultPokemonList: PokemonList = {
   next: null,
@@ -29,6 +30,11 @@ function Home() {
   const [page, setPage] = useState(1);
   const [pokemonList, setPokemonList] = useState(defaultPokemonList);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetails | null>(
+    null
+  );
+
+  const isModalOpen = useMemo(() => !!selectedPokemon, [selectedPokemon]);
 
   useEffect(() => {
     listAll();
@@ -80,8 +86,6 @@ function Home() {
     setPokemonName(event.target.value);
   };
 
-  console.log({ pokemonList });
-
   const handleSearchButtonPress = async () => {
     if (pokemonName) {
       try {
@@ -98,7 +102,6 @@ function Home() {
         toast.error("Pokemon not found", {
           position: toast.POSITION.BOTTOM_LEFT,
         });
-        console.log("error");
       } finally {
         setIsLoading(false);
       }
@@ -113,6 +116,11 @@ function Home() {
 
   return (
     <Container>
+      {isModalOpen && (
+        <Modal onCloseModal={() => setSelectedPokemon(null)}>
+          <InfoCard content={selectedPokemon!} />
+        </Modal>
+      )}
       <SearchBar
         value={pokemonName}
         onInputChange={handleSearchChange}
@@ -157,6 +165,7 @@ function Home() {
                   content={pokemon}
                   key={pokemon.name}
                   showAddToPokedexButton
+                  onMoreInfoButtonPress={() => setSelectedPokemon(pokemon)}
                 />
               );
             })}

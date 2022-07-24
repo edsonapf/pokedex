@@ -1,4 +1,5 @@
 import { createContext, ReactNode } from "react";
+import { toast } from "react-toastify";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { PokemonDetails } from "../types/Pokemon";
 
@@ -35,9 +36,14 @@ function PokedexProvider({ children }: PokedexProviderProps) {
   const addToPokedex = (pokemon: PokemonDetails) => {
     setPokedex((prevPokedex) => {
       if (pokemonIsAlreadyInPokedex(prevPokedex, pokemon)) {
+        toast.info("Pokemon is already in your pokedex", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
         return prevPokedex;
       }
-      // TODO: add a toast
+      toast.success("Pokemon has been added in your pokedex", {
+        position: toast.POSITION.BOTTOM_LEFT,
+      });
       return [...prevPokedex, pokemon];
     });
   };
@@ -50,6 +56,9 @@ function PokedexProvider({ children }: PokedexProviderProps) {
   };
 
   const removeFromPokedex = (pokemonId: number) => {
+    toast.success("Pokemon has been removed from your pokedex", {
+      position: toast.POSITION.BOTTOM_LEFT,
+    });
     setPokedex((prevPokedex) =>
       prevPokedex.filter((pokemon) => pokemon.id !== pokemonId)
     );

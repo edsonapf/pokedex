@@ -19,6 +19,7 @@ interface CardProps {
   key?: string;
   showAddToPokedexButton?: boolean;
   showRemoveFromPokedexButton?: boolean;
+  onMoreInfoButtonPress: () => void;
 }
 
 function Card({
@@ -26,6 +27,7 @@ function Card({
   key = "",
   showAddToPokedexButton = false,
   showRemoveFromPokedexButton = false,
+  onMoreInfoButtonPress,
 }: CardProps) {
   const { addToPokedex, removeFromPokedex } = useContext(PokedexContext);
 
@@ -52,7 +54,10 @@ function Card({
           })}
         </DetailsCardContainer>
         <DetailsCardContainer>
-          <MoreInfoButton className="details-card-container-child">
+          <MoreInfoButton
+            className="details-card-container-child"
+            onClick={onMoreInfoButtonPress}
+          >
             More info
           </MoreInfoButton>
           {showAddToPokedexButton && (

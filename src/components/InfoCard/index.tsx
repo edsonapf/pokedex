@@ -51,7 +51,7 @@ function InfoCard({ content }: InfoCardProps) {
             {content.abilities.map((ability) => {
               return (
                 <DetailValueText key={ability.name}>
-                  {ability.name}
+                  {ability.name.toUpperCase()}
                 </DetailValueText>
               );
             })}
