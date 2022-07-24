@@ -15,6 +15,7 @@ import PokeApiService from "../../services/PokeApiService";
 import Chip from "../../components/Chip";
 import RequestConverter from "../../utils/RequestConverter";
 import { EmptyPokedexContainer, EmptyPokedexText } from "../Pokedex/styles";
+import { toast } from "react-toastify";
 
 const defaultPokemonList: PokemonList = {
   next: null,
@@ -79,9 +80,12 @@ function Home() {
     setPokemonName(event.target.value);
   };
 
+  console.log({ pokemonList });
+
   const handleSearchButtonPress = async () => {
     if (pokemonName) {
       try {
+        setIsLoading(true);
         const response = await PokeApiService.getByIdOrName(pokemonName);
         const formattedPokemonList: PokemonList = {
           next: null,
@@ -91,7 +95,12 @@ function Home() {
         setIsFilteredByName(true);
         setPokemonList(formattedPokemonList);
       } catch {
+        toast.error("Pokemon not found", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
         console.log("error");
+      } finally {
+        setIsLoading(false);
       }
     }
   };

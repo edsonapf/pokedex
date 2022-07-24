@@ -1,5 +1,7 @@
 import { Ability, GetByIdOrNameRequest, ListRequest, Stat, Type } from "../services/PokeApiService";
 import { PokemonDetails, PokemonList } from "../types/Pokemon";
+import ColorSelector from "./ColorSelector";
+import NameConverter from "./NameConverter";
 
 class RequestConverter {
 
@@ -17,22 +19,28 @@ class RequestConverter {
       name: fullDetail.name,
       image: fullDetail.sprites.front_default,
       animatedImage: fullDetail.sprites.versions["generation-v"]["black-white"].animated.front_default,
-      types: fullDetail.types.map((type: Type) => ({
+      types: fullDetail.types.map((type: Type) => {
+        const { backgroundColor, color } = ColorSelector.getColorsByPokemonType(type.type.name.toUpperCase());
+        return {
         name: type.type.name,
-        backgroundColor: '#fff',
-        color: '#aaa',
-      })),
+        backgroundColor,
+        color,
+      }}),
       abilities: fullDetail.abilities.map((ability: Ability) => ({
         name: ability.ability.name,
       })),
       height: fullDetail.height,
       weight: fullDetail.weight,
-      stats: fullDetail.stats.map((stat: Stat) => ({
-        name: stat.stat.name,
-        color: '#fff',
-        value: stat.base_stat,
-      }))
+      stats: fullDetail.stats.map((stat: Stat) => {
+        // TODO: remove other stats
+        return {
+          name: NameConverter.convertStatName(stat.stat.name),
+          color: ColorSelector.getColorByStat(stat.stat.name),
+          value: stat.base_stat,
+        }
+      })
     }
+
   }
 }
 

@@ -5,7 +5,10 @@ import CustomRoutes from "./CustomRoutes";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { GlobalStyle } from "./styles/global";
 import themes from "./styles/themes";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+// TODO: remove theme
 type Theme = "dark" | "light";
 
 function AppWithTheme() {
@@ -22,6 +25,7 @@ function AppWithTheme() {
   return (
     <ThemeProvider theme={currentTheme}>
       <GlobalStyle />
+      <ToastContainer />
       <CustomRoutes />
     </ThemeProvider>
   );
