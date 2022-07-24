@@ -34,7 +34,7 @@ function Card({
   return (
     <Container key={key}>
       <ImageContainer>
-        <img src={content.animatedImage} alt={content.name} />
+        <img src={content.animatedImage || content.image} alt={content.name} />
       </ImageContainer>
       <InfoContainer>
         <IdText>Nº {content.id}</IdText>
