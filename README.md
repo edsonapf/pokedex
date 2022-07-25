@@ -2,7 +2,7 @@
 
 This project is a simple pokedex, using [React](https://pt-br.reactjs.org/), [PokeApi](https://pokeapi.co/docs/v2#pokemon-section) and [Netlify](https://www.netlify.com/).
 
-The design has been based on this project on [Dribbble](https://dribbble.com/shots/15128634-Pokemon-Pokedex-Website-Redesign-Concept).
+The design has been based on [Dribbble design concept](https://dribbble.com/shots/15128634-Pokemon-Pokedex-Website-Redesign-Concept).
 
 If you want to see how the project looks like, you can click here [Pokedex](https://edsonapf-pokemon-pokedex.netlify.app/).
 
