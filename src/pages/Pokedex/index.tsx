@@ -16,16 +16,8 @@ function Pokedex() {
 
   const isModalOpen = useMemo(() => !!selectedPokemon, [selectedPokemon]);
 
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-  }, [isModalOpen]);
-
   return (
-    <Container className={isModalOpen ? "modal-open" : ""}>
+    <Container>
       {isModalOpen && (
         <Modal onCloseModal={() => setSelectedPokemon(null)}>
           <InfoCard content={selectedPokemon!} />
