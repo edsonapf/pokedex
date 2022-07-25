@@ -16,7 +16,6 @@ import { PokemonDetails } from "../../types/Pokemon";
 
 interface CardProps {
   content: PokemonDetails;
-  key?: string;
   showAddToPokedexButton?: boolean;
   showRemoveFromPokedexButton?: boolean;
   onMoreInfoButtonPress: () => void;
@@ -24,7 +23,6 @@ interface CardProps {
 
 function Card({
   content,
-  key = "",
   showAddToPokedexButton = false,
   showRemoveFromPokedexButton = false,
   onMoreInfoButtonPress,
@@ -32,7 +30,7 @@ function Card({
   const { addToPokedex, removeFromPokedex } = useContext(PokedexContext);
 
   return (
-    <Container key={key}>
+    <Container>
       <ImageContainer isDefaultImage={content.isDefaultImage}>
         <img src={content.animatedImage} alt={content.name} />
       </ImageContainer>

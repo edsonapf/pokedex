@@ -6,7 +6,6 @@ interface TypeTagProps {
   backgroundColor: string;
   fontColor: string;
   className: string;
-  key?: string;
 }
 
 function TypeTag({
@@ -14,14 +13,13 @@ function TypeTag({
   backgroundColor,
   fontColor,
   className,
-  key = "",
 }: TypeTagProps) {
   return (
     <Text
       backgroundColor={backgroundColor}
       fontColor={fontColor}
       className={className}
-      key={key}
+      data-testid="type-tag"
     >
       {children}
     </Text>
