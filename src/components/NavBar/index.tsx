@@ -39,7 +39,9 @@ function NavBar() {
   return (
     <Nav>
       <LogoContainer>
-        <PokemonLogo />
+        <PageLink to="/">
+          <PokemonLogo />
+        </PageLink>
       </LogoContainer>
       <ul className={openClass}>
         <Li className={getActivePage("/")}>
