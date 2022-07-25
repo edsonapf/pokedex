@@ -14,13 +14,18 @@ class RequestConverter {
   }
 
   static toPokemonDetails(fullDetail: GetByIdOrNameRequest): PokemonDetails {
-    const imageLastIndexOfUrl = fullDetail.sprites.front_default.lastIndexOf('http');
-    const animatedImageLastIndexOfUrl = fullDetail.sprites.versions["generation-v"]["black-white"].animated.front_default.lastIndexOf('http');
+    const defaultImageUrl = "https://logodownload.org/wp-content/uploads/2017/08/pokemon-logo-8.png";
+    const imageLastIndexOfUrl = fullDetail.sprites.front_default?.lastIndexOf('http');
+    const imageUrl = imageLastIndexOfUrl >= 0 ? fullDetail.sprites.front_default.substring(imageLastIndexOfUrl) : defaultImageUrl;
+    const animatedImageLastIndexOfUrl = fullDetail.sprites.versions["generation-v"]["black-white"].animated.front_default?.lastIndexOf('http');
+    const animatedUrl = animatedImageLastIndexOfUrl >= 0 ? fullDetail.sprites.versions["generation-v"]["black-white"].animated.front_default.substring(animatedImageLastIndexOfUrl) : imageUrl;
+    const isDefaultImage = imageUrl === defaultImageUrl;
     return {
       id: fullDetail.id,
       name: fullDetail.name,
-      image: fullDetail.sprites.front_default.substring(imageLastIndexOfUrl),
-      animatedImage: fullDetail.sprites.versions["generation-v"]["black-white"].animated.front_default.substring(animatedImageLastIndexOfUrl),
+      image: imageUrl,
+      animatedImage: animatedUrl,
+      isDefaultImage,
       types: fullDetail.types.map((type: Type) => {
         const { backgroundColor, color } = ColorSelector.getColorsByPokemonType(type.type.name.toUpperCase());
         return {

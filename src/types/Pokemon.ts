@@ -9,6 +9,7 @@ export interface PokemonDetails {
   name: string;
   image: string;
   animatedImage: string;
+  isDefaultImage: boolean;
   types: PokemonTypes[];
   abilities: PokemonAbility[];
   height: number;

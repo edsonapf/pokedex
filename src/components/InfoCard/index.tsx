@@ -25,12 +25,12 @@ interface InfoCardProps {
 function InfoCard({ content }: InfoCardProps) {
   return (
     <Container>
-      <ImageContainer>
+      <ImageContainer isDefaultImage={content.isDefaultImage}>
         <img src={content.image} alt={content.name} />
       </ImageContainer>
       <InfoContainer>
         <IdText># {content.id}</IdText>
-        <NameText>{StringUtils.toFirstCharUpperCase(content.name)}</NameText>
+        <NameText>{StringUtils.formatNameCamelCase(content.name)}</NameText>
         <DetailsCardContainer>
           {content.types.map((type) => {
             return (

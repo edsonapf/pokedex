@@ -4,6 +4,10 @@ interface StatTypeTextProps {
 	background: string;
 }
 
+interface ImageContainerProps {
+	isDefaultImage: boolean;
+}
+
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -15,19 +19,21 @@ export const Container = styled.div`
 	position: relative;
 	box-shadow: var(--box-shadow);
 
-	height: 27rem;
+	height: 32rem;
 	padding: 1rem;
 
-	@media (max-width: 1080px) {
-		height: 29rem;
-	}
+	/* @media (max-width: 1080px) {
+		height: 32rem;
+	} */
 `;
 
-export const ImageContainer = styled.div`
+export const ImageContainer = styled.div<ImageContainerProps>`
 	position: absolute;
 	display: flex;
 	top: -7.5rem;
 	height: 300px;
+	top: ${({ isDefaultImage }) => isDefaultImage ? '-3.5rem' : '-7.5rem'};
+	height: ${({ isDefaultImage }) => isDefaultImage ? '100px' : '300px'};
 
 	img {
 		height: auto;
@@ -54,6 +60,7 @@ export const NameText = styled.span`
 	color: var(--dark-blue);
 	font-size: 2rem;
 	font-weight: bold;
+	text-align: center;
 `;
 
 export const DetailsContainer = styled.div`

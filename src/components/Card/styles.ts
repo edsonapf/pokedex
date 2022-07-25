@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface ImageContainerProps {
+	isDefaultImage: boolean;
+}
+
 export const Container = styled.div`
 	border-radius: 1.5rem;
 	background: var(--white);
@@ -9,21 +13,25 @@ export const Container = styled.div`
 	justify-content: space-around;
 	align-items: center;
 	box-shadow: var(--box-shadow);
-	height: 12rem;
+	height: 14rem;
 	width: 15rem;
 	position: relative;
-`
 
-export const ImageContainer = styled.div`
+	@media (max-width: 1080px) {
+		height: 15rem;	
+	}
+`;
+
+export const ImageContainer = styled.div<ImageContainerProps>`
 	position: absolute;
 	display: flex;
-	top: -3.75rem;
-	height: 100px;
+	top: ${({ isDefaultImage }) => isDefaultImage ? '-3rem' : '-3.75rem'};
+	height: ${({ isDefaultImage }) => isDefaultImage ? '75px' : '100px'};
 
 	img {
-		object-fit: none;
+		object-fit: ${({ isDefaultImage }) => isDefaultImage ? 'contain' : 'none'};
 	}
-`
+`;
 
 export const InfoContainer = styled.div`
 	display: flex;
@@ -36,6 +44,7 @@ export const NameText = styled.span`
 	color: var(--dark-blue);
 	font-size: 1.75rem;
 	font-weight: bold;
+	text-align: center;
 `;
 
 export const IdText = styled.span`
