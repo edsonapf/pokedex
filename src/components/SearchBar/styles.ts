@@ -14,11 +14,11 @@ export const Input = styled.input`
   outline: none;
   border: none;
   font-size: 1.2rem;
-  color: #c3c3c3;
+  color: #787878;
   font-weight: 400;
 
   &::placeholder {
-    color: rgba(195, 195, 195, 0.5);
+    color: #c3c3c3;
   }
 `;
 
