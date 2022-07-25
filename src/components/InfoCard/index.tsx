@@ -50,7 +50,10 @@ function InfoCard({ content }: InfoCardProps) {
           <DetailSection>
             {content.abilities.map((ability) => {
               return (
-                <DetailValueText key={ability.name}>
+                <DetailValueText
+                  key={ability.name}
+                  data-testid="detail-value-text"
+                >
                   {ability.name.toUpperCase()}
                 </DetailValueText>
               );
@@ -76,7 +79,7 @@ function InfoCard({ content }: InfoCardProps) {
           <HeightWeightContainer>
             {content.stats.map((stat) => {
               return (
-                <StatBubble key={stat.name}>
+                <StatBubble key={stat.name} data-testid="stat-bubble">
                   <StatTypeText background={stat.color}>
                     {stat.name}
                   </StatTypeText>
