@@ -14,33 +14,31 @@ function Pagination({ lastPage, currentPage, onChangePage }: PaginationProps) {
     [currentPage, lastPage]
   );
 
-  const getPagesByAvailableAmount = useCallback(
-    (availablePagesAmount: number) => {
-      const numberPages = [];
+  const pages = useMemo(
+    () => Array.from({ length: lastPage }, (_, i) => i + 1),
+    [lastPage]
+  );
+
+  const getPagesToShow = useCallback(
+    (pagesAmountToShow: number) => {
       if (isFirstPage) {
-        for (let i = 1; i <= availablePagesAmount; i++) {
-          numberPages.push(i);
-        }
-        return numberPages;
+        return pages.slice(0, pagesAmountToShow);
       }
 
       if (isLastPage) {
-        for (let i = availablePagesAmount - 1; i >= 0; i--) {
-          numberPages.push(lastPage - i);
-        }
-        return numberPages;
+        return pages.slice(-pagesAmountToShow);
       }
 
       return [currentPage - 1, currentPage, currentPage + 1];
     },
-    [currentPage, lastPage, isFirstPage, isLastPage]
+    [currentPage, pages, isFirstPage, isLastPage]
   );
 
   const pagesNumberToRender = useMemo(() => {
-    const availablePagesAmount = lastPage > 3 ? 3 : lastPage;
+    const pagesAmountToShow = lastPage > 3 ? 3 : lastPage;
 
-    return getPagesByAvailableAmount(availablePagesAmount);
-  }, [lastPage, getPagesByAvailableAmount]);
+    return getPagesToShow(pagesAmountToShow);
+  }, [lastPage, getPagesToShow]);
 
   return (
     <Container>
