@@ -1,61 +1,63 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Pokedex from ".";
-import { PokedexContext } from "../../context/PokedexContext";
+import Home from ".";
+import PokeApiService from "../../services/PokeApiService";
+import { PokemonList } from "../../types/Pokemon";
 import { mockContent } from "../../utils/consts";
 import HtmlUtils from "../../utils/HtmlUtils";
 
-const defaultContext = {
-  pokedex: [mockContent],
-  addToPokedex() {},
-  removeFromPokedex() {},
+const mockReturn: PokemonList = {
+  next: null,
+  previous: null,
+  pokemons: [mockContent],
 };
 
-describe("Pokedex page", () => {
+describe("Home page", () => {
   beforeAll(() => {
     HtmlUtils.setModalDiv();
   });
 
-  test("Should render with empty list", () => {
-    render(<Pokedex />);
+  test("Should render when is loading", async () => {
+    render(<Home />);
 
-    const emptyText = screen.getByText(
-      "You do not have pokemon in your pokedex"
-    );
-
-    expect(emptyText).toBeInTheDocument();
+    await waitFor(() => {
+      const loading = screen.getByText("Loading...");
+      expect(loading).toBeInTheDocument();
+    });
   });
 
-  test("Should render one item from pokedex", () => {
-    render(
-      <PokedexContext.Provider value={defaultContext}>
-        <Pokedex />
-      </PokedexContext.Provider>
-    );
+  test("Should render when is pokemon list has been loaded", async () => {
+    PokeApiService.listAll = jest
+      .fn()
+      .mockImplementation(() => Promise.resolve(mockReturn));
+    render(<Home />);
 
-    const pokemonId = screen.getByText("Nº 999");
-    const pokemonName = screen.getByText("Pokemon Name");
-    const pokemonType = screen.getByText("GRASS");
-    const moreInfoButton = screen.getByRole("button", { name: /More info/i });
-    const removeFromPokedexButton = screen.getByRole("button", {
-      name: /- Pokedex/i,
+    const pokemonId = await screen.findByText("Nº 999");
+    const pokemonName = await screen.findByText("Pokemon Name");
+    const pokemonType = await screen.findByText("GRASS");
+    const moreInfoButton = await screen.findByRole("button", {
+      name: /More info/i,
+    });
+    const addToPokedexButton = await screen.findByRole("button", {
+      name: /\+ Pokedex/i,
     });
 
     expect(pokemonId).toBeInTheDocument();
     expect(pokemonName).toBeInTheDocument();
     expect(pokemonType).toBeInTheDocument();
     expect(moreInfoButton).toBeInTheDocument();
-    expect(removeFromPokedexButton).toBeInTheDocument();
+    expect(addToPokedexButton).toBeInTheDocument();
   });
 
-  test("Should render pokemon more info modal", () => {
-    render(
-      <PokedexContext.Provider value={defaultContext}>
-        <Pokedex />
-      </PokedexContext.Provider>
-    );
+  test("Should render pokemon list and open more info modal", async () => {
+    PokeApiService.listAll = jest
+      .fn()
+      .mockImplementation(() => Promise.resolve(mockReturn));
+    render(<Home />);
 
-    const moreInfoButton = screen.getByRole("button", { name: /More info/i });
+    const moreInfoButton = await screen.findByRole("button", {
+      name: /More info/i,
+    });
     expect(moreInfoButton).toBeInTheDocument();
     userEvent.click(moreInfoButton);
 
@@ -74,14 +76,15 @@ describe("Pokedex page", () => {
     expect(atkValue).toBeInTheDocument();
   });
 
-  test("Should close pokemon more info modal", () => {
-    render(
-      <PokedexContext.Provider value={defaultContext}>
-        <Pokedex />
-      </PokedexContext.Provider>
-    );
+  test("Should render pokemon list, open and close more info modal", async () => {
+    PokeApiService.listAll = jest
+      .fn()
+      .mockImplementation(() => Promise.resolve(mockReturn));
+    render(<Home />);
 
-    const moreInfoButton = screen.getByRole("button", { name: /More info/i });
+    const moreInfoButton = await screen.findByRole("button", {
+      name: /More info/i,
+    });
     expect(moreInfoButton).toBeInTheDocument();
     userEvent.click(moreInfoButton);
 
