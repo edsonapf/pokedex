@@ -12,6 +12,10 @@ const defaultContext = {
 };
 
 describe("Pokedex page", () => {
+  beforeAll(() => {
+    HtmlUtils.setModalDiv();
+  });
+
   test("Should render with empty list", () => {
     render(<Pokedex />);
 
@@ -45,8 +49,6 @@ describe("Pokedex page", () => {
   });
 
   test("Should render pokemon more detail modal", () => {
-    HtmlUtils.setModalDiv();
-
     render(
       <PokedexContext.Provider value={defaultContext}>
         <Pokedex />
@@ -65,8 +67,6 @@ describe("Pokedex page", () => {
   });
 
   test("Should close pokemon more detail modal", () => {
-    HtmlUtils.setModalDiv();
-
     render(
       <PokedexContext.Provider value={defaultContext}>
         <Pokedex />

@@ -6,9 +6,11 @@ const text = "Modal render";
 const onCloseModal = () => {};
 
 describe("Modal component", () => {
-  test("Should render modal with child", () => {
+  beforeAll(() => {
     HtmlUtils.setModalDiv();
+  });
 
+  test("Should render modal with child", () => {
     render(<Modal onCloseModal={onCloseModal}>{text}</Modal>);
 
     const textChild = screen.getByText(text);
@@ -17,8 +19,6 @@ describe("Modal component", () => {
   });
 
   test("Should render modal with empty child", () => {
-    HtmlUtils.setModalDiv();
-
     render(<Modal onCloseModal={onCloseModal}>{""}</Modal>);
 
     const textChild = screen.queryByText(text);
