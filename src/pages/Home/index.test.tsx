@@ -17,7 +17,7 @@ describe("Home page", () => {
     HtmlUtils.setModalDiv();
   });
 
-  it("Should render when is loading", async () => {
+  it("Should render loading text", async () => {
     render(<Home />);
 
     await waitFor(() => {
@@ -26,7 +26,7 @@ describe("Home page", () => {
     });
   });
 
-  it("Should render when is pokemon list has been loaded", async () => {
+  it("Should render loaded pokemon list", async () => {
     PokeApiService.listAll = jest
       .fn()
       .mockImplementation(() => Promise.resolve(mockReturn));
@@ -47,6 +47,18 @@ describe("Home page", () => {
     expect(pokemonType).toBeInTheDocument();
     expect(moreInfoButton).toBeInTheDocument();
     expect(addToPokedexButton).toBeInTheDocument();
+  });
+
+  it("Should render empty pokemon list", async () => {
+    const emptyPokemonsMock = { ...mockReturn, pokemons: [] };
+    PokeApiService.listAll = jest
+      .fn()
+      .mockImplementation(() => Promise.resolve(emptyPokemonsMock));
+    render(<Home />);
+
+    const noPokemons = await screen.findByText("There is no pokemons");
+
+    expect(noPokemons).toBeInTheDocument();
   });
 
   it("Should render pokemon list and open more info modal", async () => {
