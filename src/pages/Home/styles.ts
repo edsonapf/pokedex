@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ReactComponent as PokeballIconSvg } from "../../assets/icons/pokeball.svg";
 
 interface PokeballIconProps {
-	isLoadingIcon?: boolean;
+	$isLoadingIcon?: boolean;
 }
 
 export const Container = styled.main`
@@ -46,7 +46,7 @@ export const PokeballIcon = styled(PokeballIconSvg)<PokeballIconProps>`
 	height: 3rem;
   margin-bottom: 1rem;
   fill: #777;
-	animation: ${({ isLoadingIcon }) => isLoadingIcon ? 'rotation 2s infinite linear' : 'none' };
+	animation: ${({ $isLoadingIcon }) => $isLoadingIcon ? 'rotation 2s infinite linear' : 'none' };
 	
 	@keyframes rotation {
 		from {

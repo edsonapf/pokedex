@@ -148,7 +148,7 @@ function Home() {
       <div style={{ paddingTop: "2rem" }}>
         {isLoading ? (
           <EmptyOrLoadingContainer text="Loading...">
-            <PokeballIcon isLoadingIcon />
+            <PokeballIcon $isLoadingIcon />
           </EmptyOrLoadingContainer>
         ) : pokemonList.pokemons.length > 0 ? (
           <PokemonListContainer>
