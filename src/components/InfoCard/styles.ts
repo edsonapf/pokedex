@@ -30,7 +30,6 @@ export const Container = styled.div`
 export const ImageContainer = styled.div<ImageContainerProps>`
 	position: absolute;
 	display: flex;
-	top: -7.5rem;
 	height: 300px;
 	top: ${({ isDefaultImage }) => isDefaultImage ? '-3.5rem' : '-7.5rem'};
 	height: ${({ isDefaultImage }) => isDefaultImage ? '100px' : '300px'};
