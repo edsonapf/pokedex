@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import Pokedex from ".";
 import { PokedexContext } from "../../context/PokedexContext";
 import { mockContent } from "../../utils/consts";
+import HtmlUtils from "../../utils/HtmlUtils";
 
 const defaultContext = {
   pokedex: [mockContent],
@@ -44,9 +45,7 @@ describe("Pokedex page", () => {
   });
 
   test("Should render pokemon more detail modal", () => {
-    const container = document.createElement("div");
-    container.setAttribute("id", "modal-root");
-    document.body.append(container);
+    HtmlUtils.setModalDiv();
 
     render(
       <PokedexContext.Provider value={defaultContext}>
@@ -66,9 +65,7 @@ describe("Pokedex page", () => {
   });
 
   test("Should close pokemon more detail modal", () => {
-    const container = document.createElement("div");
-    container.setAttribute("id", "modal-root");
-    document.body.append(container);
+    HtmlUtils.setModalDiv();
 
     render(
       <PokedexContext.Provider value={defaultContext}>

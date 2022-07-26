@@ -1,14 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import Modal from ".";
+import HtmlUtils from "../../utils/HtmlUtils";
 
 const text = "Modal render";
 const onCloseModal = () => {};
 
 describe("Modal component", () => {
   test("Should render modal with child", () => {
-    const container = document.createElement("div");
-    container.setAttribute("id", "modal-root");
-    document.body.append(container);
+    HtmlUtils.setModalDiv();
 
     render(<Modal onCloseModal={onCloseModal}>{text}</Modal>);
 
@@ -18,9 +17,7 @@ describe("Modal component", () => {
   });
 
   test("Should render modal with empty child", () => {
-    const container = document.createElement("div");
-    container.setAttribute("id", "modal-root");
-    document.body.append(container);
+    HtmlUtils.setModalDiv();
 
     render(<Modal onCloseModal={onCloseModal}>{""}</Modal>);
 
