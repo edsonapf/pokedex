@@ -18,27 +18,6 @@ export const FiltersContainer = styled.div`
 	flex-direction: row;
 	justify-content: space-between;
 	margin-top: 2rem
-`
-
-export const ButtonsContainer = styled.div`
-	.button-container-child:not(:first-child) {
-		margin-left: 0.3rem;
-	}
-`;
-
-export const PageButton = styled.button`
-		background: var(--white);
-		color: var(--red);
-		border: none;
-		font-size: 1rem;
-		font-weight: bold;
-		padding: 0.5rem;
-		border-radius: 0.5rem;
-		box-shadow: var(--box-shadow);
-
-		&:disabled {
-			cursor: default;
-		}
 `;
 
 export const PokeballIcon = styled(PokeballIconSvg)<PokeballIconProps>`

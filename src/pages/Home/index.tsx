@@ -1,10 +1,4 @@
-import {
-  ButtonsContainer,
-  Container,
-  FiltersContainer,
-  PageButton,
-  PokeballIcon,
-} from "./styles";
+import { Container, FiltersContainer, PokeballIcon } from "./styles";
 import Card from "../../components/Card";
 import InfoCard from "../../components/InfoCard";
 import SearchBar from "../../components/SearchBar";
@@ -17,8 +11,10 @@ import RequestConverter from "../../utils/RequestConverter";
 import { toast } from "react-toastify";
 import Modal from "../../components/Modal";
 import EmptyOrLoadingContainer from "../../components/EmptyOrLoadingContainer";
+import Pagination from "../../components/Pagination";
 
 const defaultPokemonList: PokemonList = {
+  lastPage: 1,
   next: null,
   previous: null,
   pokemons: [],
@@ -44,16 +40,8 @@ function Home() {
     listAll(offset);
   }, [page]);
 
-  const handleNextPage = async () => {
-    if (pokemonList.next) {
-      setPage((prev) => prev + 1);
-    }
-  };
-
-  const handleBackPage = async () => {
-    if (pokemonList.previous) {
-      setPage((prev) => prev - 1);
-    }
+  const handleChangePage = (page: number) => {
+    setPage(page);
   };
 
   const listAll = async (offset: number = 0, limit: number = 20) => {
@@ -74,6 +62,7 @@ function Home() {
         setIsLoading(true);
         const response = await PokeApiService.getByIdOrName(pokemonName);
         const formattedPokemonList: PokemonList = {
+          lastPage: 1,
           next: null,
           previous: null,
           pokemons: [RequestConverter.toPokemonDetails(response)],
@@ -117,29 +106,11 @@ function Home() {
       />
       <FiltersContainer>
         {!isFilteredByName && (
-          <ButtonsContainer>
-            {!!pokemonList.previous && (
-              <PageButton
-                className="button-container-child"
-                disabled={!pokemonList.previous}
-                onClick={handleBackPage}
-              >
-                {"<"}
-              </PageButton>
-            )}
-            <PageButton className="button-container-child" disabled>
-              {page}
-            </PageButton>
-            {!!pokemonList.next && (
-              <PageButton
-                className="button-container-child"
-                disabled={!pokemonList.next}
-                onClick={handleNextPage}
-              >
-                {">"}
-              </PageButton>
-            )}
-          </ButtonsContainer>
+          <Pagination
+            currentPage={page}
+            lastPage={pokemonList.lastPage}
+            onChangePage={handleChangePage}
+          />
         )}
         {isFilteredByName && (
           <Chip text={searchedPokemon} onRemoveChip={handleRemoveSearch} />
