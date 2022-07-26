@@ -1,7 +1,7 @@
 import { Container, PokeballIcon } from "./styles";
 import PokemonListContainer from "../../components/PokemonListContainer";
 import Card from "../../components/Card";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { PokedexContext } from "../../context/PokedexContext";
 import { PokemonDetails } from "../../types/Pokemon";
 import Modal from "../../components/Modal";

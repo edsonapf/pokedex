@@ -15,7 +15,9 @@ function Modal({ children, onCloseModal }: ModalProps) {
   };
 
   return ReactDOM.createPortal(
-    <Backdrop onClick={handleCloseModal}>{children}</Backdrop>,
+    <Backdrop onClick={handleCloseModal} data-testid="backdrop">
+      {children}
+    </Backdrop>,
     document.getElementById("modal-root")!
   );
 }
