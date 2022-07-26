@@ -16,7 +16,7 @@ describe("Pokedex page", () => {
     HtmlUtils.setModalDiv();
   });
 
-  test("Should render with empty list", () => {
+  it("Should render with empty list", () => {
     render(<Pokedex />);
 
     const emptyText = screen.getByText(
@@ -26,7 +26,7 @@ describe("Pokedex page", () => {
     expect(emptyText).toBeInTheDocument();
   });
 
-  test("Should render one item from pokedex", () => {
+  it("Should render one item from pokedex", () => {
     render(
       <PokedexContext.Provider value={defaultContext}>
         <Pokedex />
@@ -48,7 +48,7 @@ describe("Pokedex page", () => {
     expect(removeFromPokedexButton).toBeInTheDocument();
   });
 
-  test("Should render pokemon more info modal", () => {
+  it("Should render pokemon more info modal", () => {
     render(
       <PokedexContext.Provider value={defaultContext}>
         <Pokedex />
@@ -74,7 +74,7 @@ describe("Pokedex page", () => {
     expect(atkValue).toBeInTheDocument();
   });
 
-  test("Should close pokemon more info modal", () => {
+  it("Should close pokemon more info modal", () => {
     render(
       <PokedexContext.Provider value={defaultContext}>
         <Pokedex />

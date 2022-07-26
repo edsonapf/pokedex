@@ -8,7 +8,7 @@ const defaultProps = {
 };
 
 describe("SearchBar component", () => {
-  test("Should render all children", () => {
+  it("Should render all children", () => {
     const { onInputChange, onSearchButtonPress } = defaultProps;
     render(
       <SearchBar
@@ -25,7 +25,7 @@ describe("SearchBar component", () => {
     expect(button).toBeInTheDocument();
   });
 
-  test("Should have value on input", () => {
+  it("Should have value on input", () => {
     const { onInputChange, onSearchButtonPress, value } = defaultProps;
     render(
       <SearchBar

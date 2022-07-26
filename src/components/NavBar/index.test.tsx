@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import NavBar from ".";
 
 describe("NavBar component", () => {
-  test("Should render all children", () => {
+  it("Should render all children", () => {
     render(<NavBar />, { wrapper: BrowserRouter });
 
     const navBar = screen.getByRole("navigation");

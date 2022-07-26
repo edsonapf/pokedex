@@ -8,7 +8,7 @@ const defaultProps = {
 };
 
 describe("Card component", () => {
-  test("Should render all component", () => {
+  it("Should render all component", () => {
     const { content, onMoreInfoButtonPress } = defaultProps;
     render(
       <Card
@@ -36,7 +36,7 @@ describe("Card component", () => {
     expect(removePokedex).toBeInTheDocument();
   });
 
-  test("Should not render remove from pokedex button and render add to pokedex button", () => {
+  it("Should not render remove from pokedex button and render add to pokedex button", () => {
     const { content, onMoreInfoButtonPress } = defaultProps;
     render(
       <Card
@@ -52,7 +52,7 @@ describe("Card component", () => {
     expect(removePokedex).not.toBeInTheDocument();
   });
 
-  test("Should not render add to pokedex button and render remove from pokedex button", () => {
+  it("Should not render add to pokedex button and render remove from pokedex button", () => {
     const { content, onMoreInfoButtonPress } = defaultProps;
     render(
       <Card
@@ -68,7 +68,7 @@ describe("Card component", () => {
     expect(removePokedex).toBeInTheDocument();
   });
 
-  test("Should not render both add to pokedex button and remove from pokedex button", () => {
+  it("Should not render both add to pokedex button and remove from pokedex button", () => {
     const { content, onMoreInfoButtonPress } = defaultProps;
     render(
       <Card content={content} onMoreInfoButtonPress={onMoreInfoButtonPress} />

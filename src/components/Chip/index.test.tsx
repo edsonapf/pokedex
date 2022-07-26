@@ -9,7 +9,7 @@ const defaultProps = {
 };
 
 describe("Chip component", () => {
-  test('Should contains the following text "chip test"', () => {
+  it('Should contains the following text "chip test"', () => {
     render(
       <Chip text={defaultProps.text} onRemoveChip={defaultProps.onRemoveChip} />
     );
@@ -17,7 +17,7 @@ describe("Chip component", () => {
     expect(chipText).toBeInTheDocument();
   });
 
-  test("Should contains a button", () => {
+  it("Should contains a button", () => {
     render(
       <Chip text={defaultProps.text} onRemoveChip={defaultProps.onRemoveChip} />
     );

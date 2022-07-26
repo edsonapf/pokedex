@@ -9,7 +9,7 @@ const defaultProps = {
 };
 
 describe("TypeTag component", () => {
-  test("Should render child", () => {
+  it("Should render child", () => {
     const { backgroundColor, fontColor, className } = defaultProps;
     render(
       <TypeTag
@@ -27,7 +27,7 @@ describe("TypeTag component", () => {
     expect(textChild).toBeInTheDocument();
   });
 
-  test("Should render empty child", () => {
+  it("Should render empty child", () => {
     const { backgroundColor, fontColor, className } = defaultProps;
     render(
       <TypeTag

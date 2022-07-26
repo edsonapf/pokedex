@@ -4,13 +4,13 @@ import DetailsCardContainer from ".";
 const text = "Details card container";
 
 describe("DetailsCardContainer component", () => {
-  test("Should render child", () => {
+  it("Should render child", () => {
     render(<DetailsCardContainer>{text}</DetailsCardContainer>);
     const textChild = screen.getByText(text);
     expect(textChild).toBeInTheDocument();
   });
 
-  test("Should render empty child", () => {
+  it("Should render empty child", () => {
     render(<DetailsCardContainer>{""}</DetailsCardContainer>);
     const textChild = screen.queryByText(text);
     expect(textChild).not.toBeInTheDocument();

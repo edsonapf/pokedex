@@ -17,7 +17,7 @@ describe("Home page", () => {
     HtmlUtils.setModalDiv();
   });
 
-  test("Should render when is loading", async () => {
+  it("Should render when is loading", async () => {
     render(<Home />);
 
     await waitFor(() => {
@@ -26,7 +26,7 @@ describe("Home page", () => {
     });
   });
 
-  test("Should render when is pokemon list has been loaded", async () => {
+  it("Should render when is pokemon list has been loaded", async () => {
     PokeApiService.listAll = jest
       .fn()
       .mockImplementation(() => Promise.resolve(mockReturn));
@@ -49,7 +49,7 @@ describe("Home page", () => {
     expect(addToPokedexButton).toBeInTheDocument();
   });
 
-  test("Should render pokemon list and open more info modal", async () => {
+  it("Should render pokemon list and open more info modal", async () => {
     PokeApiService.listAll = jest
       .fn()
       .mockImplementation(() => Promise.resolve(mockReturn));
@@ -76,7 +76,7 @@ describe("Home page", () => {
     expect(atkValue).toBeInTheDocument();
   });
 
-  test("Should render pokemon list, open and close more info modal", async () => {
+  it("Should render pokemon list, open and close more info modal", async () => {
     PokeApiService.listAll = jest
       .fn()
       .mockImplementation(() => Promise.resolve(mockReturn));

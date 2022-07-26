@@ -3,7 +3,7 @@ import InfoCard from ".";
 import { mockContent } from "../../utils/consts";
 
 describe("InfoCard component", () => {
-  test("Should render all content data", () => {
+  it("Should render all content data", () => {
     render(<InfoCard content={mockContent} />);
 
     const id = screen.getByText("# 999");
@@ -25,7 +25,7 @@ describe("InfoCard component", () => {
     expect(stat).toBeInTheDocument();
   });
 
-  test("Should not contains type tag", () => {
+  it("Should not contains type tag", () => {
     const mockWithoutTypes = { ...mockContent, types: [] };
     render(<InfoCard content={mockWithoutTypes} />);
 
@@ -34,7 +34,7 @@ describe("InfoCard component", () => {
     expect(typeTag).not.toBeInTheDocument();
   });
 
-  test("Should not contains detail value text", () => {
+  it("Should not contains detail value text", () => {
     const mockWithoutTypes = { ...mockContent, abilities: [] };
     render(<InfoCard content={mockWithoutTypes} />);
 
@@ -43,7 +43,7 @@ describe("InfoCard component", () => {
     expect(detailValueText).not.toBeInTheDocument();
   });
 
-  test("Should not contains stats", () => {
+  it("Should not contains stats", () => {
     const mockWithoutTypes = { ...mockContent, stats: [] };
     render(<InfoCard content={mockWithoutTypes} />);
 
