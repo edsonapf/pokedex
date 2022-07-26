@@ -148,9 +148,9 @@ function Home() {
       <div style={{ paddingTop: "2rem" }}>
         {isLoading ? (
           <EmptyOrLoadingContainer text="Loading...">
-            <PokeballIcon />
+            <PokeballIcon isLoadingIcon />
           </EmptyOrLoadingContainer>
-        ) : (
+        ) : pokemonList.pokemons.length > 0 ? (
           <PokemonListContainer>
             {pokemonList.pokemons.map((pokemon: PokemonDetails) => {
               return (
@@ -163,6 +163,10 @@ function Home() {
               );
             })}
           </PokemonListContainer>
+        ) : (
+          <EmptyOrLoadingContainer text="There is no pokemons">
+            <PokeballIcon />
+          </EmptyOrLoadingContainer>
         )}
       </div>
     </Container>

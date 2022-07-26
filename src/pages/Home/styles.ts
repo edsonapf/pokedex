@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { ReactComponent as PokeballIconSvg } from "../../assets/icons/pokeball.svg";
 
+interface PokeballIconProps {
+	isLoadingIcon?: boolean;
+}
+
 export const Container = styled.main`
 	display: flex;
 	flex-direction: column;
@@ -37,12 +41,12 @@ export const PageButton = styled.button`
 		}
 `;
 
-export const PokeballIcon = styled(PokeballIconSvg)`
+export const PokeballIcon = styled(PokeballIconSvg)<PokeballIconProps>`
 	width: 3rem;
 	height: 3rem;
   margin-bottom: 1rem;
   fill: #777;
-	animation: rotation 2s infinite linear;
+	animation: ${({ isLoadingIcon }) => isLoadingIcon ? 'rotation 2s infinite linear' : 'none' };
 	
 	@keyframes rotation {
 		from {
