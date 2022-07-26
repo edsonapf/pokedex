@@ -1,12 +1,14 @@
 import { Ability, GetByIdOrNameRequest, ListRequest, Stat, Type } from "../types/PokeApi";
 import { PokemonDetails, PokemonList, PokemonStats } from "../types/Pokemon";
 import ColorSelector from "./ColorSelector";
+import { LIMIT } from "./consts";
 import NameConverter from "./NameConverter";
 
 class RequestConverter {
 
   static toPokemonList(simpleDetail: ListRequest, pokemons: PokemonDetails[]): PokemonList {
     return {
+      lastPage: Math.ceil(simpleDetail.count / LIMIT),
       next: simpleDetail.next,
       previous: simpleDetail.previous,
       pokemons,

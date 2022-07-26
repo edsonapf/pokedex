@@ -32,6 +32,7 @@ import { PokemonList } from "../types/Pokemon";
 import { pokemonDetails } from "./pokemon_detail";
 
 export const pokemonList: PokemonList = {
+	lastPage: 1,
 	next: "https://pokeapi.co/api/v2/pokemon?offset=40&limit=20",
   previous: "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20",
 	pokemons: [

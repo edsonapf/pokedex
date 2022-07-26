@@ -5,6 +5,7 @@ export interface AxiosListRequest {
 }
 
 export interface ListRequest {
+	count: number;
 	next: string | null;
 	previous: string | null;
 	results: Result[];

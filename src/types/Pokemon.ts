@@ -1,4 +1,5 @@
 export interface PokemonList {
+  lastPage: number;
   next: string | null;
   previous: string | null;
   pokemons: PokemonDetails[];

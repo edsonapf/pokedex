@@ -12,3 +12,5 @@ export const mockContent: PokemonDetails = {
   weight: 10.5,
   stats: [{ name: "ATK", color: "#aaa", value: 70 }],
 };
+
+export const LIMIT = 20;

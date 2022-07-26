@@ -7,6 +7,7 @@ import { mockContent } from "../../utils/consts";
 import HtmlUtils from "../../utils/HtmlUtils";
 
 const mockReturn: PokemonList = {
+  lastPage: 1,
   next: null,
   previous: null,
   pokemons: [mockContent],
