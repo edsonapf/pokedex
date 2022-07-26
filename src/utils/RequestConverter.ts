@@ -1,4 +1,4 @@
-import { Ability, GetByIdOrNameRequest, ListRequest, Stat, Type } from "../services/PokeApiService";
+import { Ability, GetByIdOrNameRequest, ListRequest, Stat, Type } from "../types/PokeApi";
 import { PokemonDetails, PokemonList, PokemonStats } from "../types/Pokemon";
 import ColorSelector from "./ColorSelector";
 import NameConverter from "./NameConverter";
